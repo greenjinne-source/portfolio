@@ -151,7 +151,7 @@
 
       const subject = encodeURIComponent(`Портфолио: сообщение от ${data.name}`);
       const body = encodeURIComponent(`${data.message}\n\n— ${data.name} (${data.email})`);
-      window.location.href = `mailto:hello@alexrivera.design?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:hello@melekhin-design.ru?subject=${subject}&body=${body}`;
 
       if (status) {
         status.textContent = "Открываем ваш почтовый клиент…";
