@@ -391,7 +391,7 @@ a:hover .icon-chip,
   gap: var(--space-4);
   white-space: nowrap;
   width: max-content;
-  animation: marquee 24s linear infinite;
+  animation: marquee 34s linear infinite;
   font-family: var(--font-heading);
   font-weight: 600;
   text-transform: uppercase;
