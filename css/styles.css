@@ -443,7 +443,7 @@ section[id] { scroll-margin-top: 90px; }
 }
 .media-block {
   aspect-ratio: 1;
-  border-radius: 50%;
+  border-radius: var(--radius-lg);
   background: var(--color-sage);
   color: var(--color-sage-ink);
   display: flex;
@@ -458,7 +458,7 @@ section[id] { scroll-margin-top: 90px; }
 .media-block img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 .about-content .section-title { margin-bottom: var(--space-3); }
 .about-text {
