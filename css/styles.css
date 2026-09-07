@@ -495,6 +495,35 @@ section[id] { scroll-margin-top: 90px; }
 }
 
 /* About */
+#about {
+  position: relative;
+  overflow: hidden;
+  /* Force a dark-surface palette regardless of the page theme, since the
+     photo background behind this section is always dark. */
+  color: #EAF7F5;
+  --color-foreground: #EAF7F5;
+  --color-muted-foreground: #9FC4BE;
+  --color-accent-soft: #3A1D0E;
+  --color-accent-text: #FF9A66;
+  --color-teal-soft: #123A36;
+  --color-teal-ink: #B6F3EC;
+  --color-muted: rgba(16, 34, 31, 0.65);
+  --color-border-subtle: #1B3733;
+}
+#about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../assets/work/about-bg.jpg") center / cover no-repeat;
+  z-index: -2;
+}
+#about::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, rgba(6, 17, 15, 0.35) 0%, rgba(6, 17, 15, 0.82) 55%, rgba(6, 17, 15, 0.92) 100%);
+  z-index: -1;
+}
 .about-grid {
   display: grid;
   gap: var(--space-6);
