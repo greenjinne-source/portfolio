@@ -1,30 +1,29 @@
 /* ==========================================================================
-   Design tokens — soft SaaS system (RentEase-inspired: lime, sage, cream,
-   large radii, soft shadows, circular chip buttons)
+   Design tokens — teal + bright orange editorial system: numbered indices,
+   icon badges, pulsing pixel-mosaic decoration, large radii, soft shadows.
    ========================================================================== */
 :root {
-  --color-primary: #121210;
-  --color-on-primary: #F7F7F2;
-  --color-background: #F7F7F2;
-  --color-foreground: #121210;
+  --color-primary: #0B2422;
+  --color-on-primary: #F3FBFA;
+  --color-background: #F3FBFA;
+  --color-foreground: #0B2422;
   --color-card: #FFFFFF;
-  --color-card-foreground: #121210;
+  --color-card-foreground: #0B2422;
 
-  --color-accent: #E8FA55;        /* lime — fills, CTAs, highlights */
-  --color-accent-ink: #121210;    /* text placed on accent fills */
-  --color-accent-soft: #F5FAD1;   /* pale lime wash for section bg */
-  --color-accent-text: #6B7A00;   /* accent used as text on light bg (AA-safe) */
+  --color-accent: #FF5A1F;        /* bright orange — fills, CTAs, highlights */
+  --color-accent-ink: #1C0900;    /* text placed on accent fills */
+  --color-accent-soft: #FFE3D3;   /* pale orange wash for section bg */
+  --color-accent-text: #C7430E;   /* accent used as text on light bg (AA-safe) */
 
-  --color-sage: #C9D6BE;          /* secondary wash */
-  --color-sage-ink: #2B3A22;
-  --color-lavender: #E1E0F7;      /* tertiary wash */
-  --color-lavender-ink: #423F7A;
+  --color-teal: #0E9C93;          /* secondary wash / graphic color */
+  --color-teal-ink: #063F3A;
+  --color-teal-soft: #D7F3EF;
 
-  --color-muted: #EFEEE6;
-  --color-muted-foreground: #6B6A60;
-  --color-border-subtle: #E6E4D9;
+  --color-muted: #E7F1EF;
+  --color-muted-foreground: #5C726E;
+  --color-border-subtle: #D8E7E4;
   --color-destructive: #DC2626;
-  --color-ring: #121210;
+  --color-ring: #FF5A1F;
 
   --font-heading: "Bricolage Grotesque", "Plus Jakarta Sans", system-ui, sans-serif;
   --font-body: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
@@ -42,8 +41,8 @@
   --radius-md: 18px;
   --radius-sm: 12px;
 
-  --shadow-soft: 0 20px 44px -20px rgba(18, 18, 16, 0.22);
-  --shadow-soft-sm: 0 10px 24px -12px rgba(18, 18, 16, 0.18);
+  --shadow-soft: 0 20px 44px -20px rgba(11, 36, 34, 0.22);
+  --shadow-soft-sm: 0 10px 24px -12px rgba(11, 36, 34, 0.18);
 
   --duration: 220ms;
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
@@ -53,27 +52,26 @@
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --color-primary: #F7F7F2;
-  --color-on-primary: #121210;
-  --color-background: #14140F;
-  --color-foreground: #F5F4EC;
-  --color-card: #1E1E16;
-  --color-card-foreground: #F5F4EC;
+  --color-primary: #EAF7F5;
+  --color-on-primary: #06110F;
+  --color-background: #06110F;
+  --color-foreground: #EAF7F5;
+  --color-card: #0E211E;
+  --color-card-foreground: #EAF7F5;
 
-  --color-accent: #E8FA55;
-  --color-accent-ink: #121210;
-  --color-accent-soft: #2A2D14;
-  --color-accent-text: #E8FA55;
+  --color-accent: #FF7A3D;
+  --color-accent-ink: #1C0900;
+  --color-accent-soft: #3A1D0E;
+  --color-accent-text: #FF9A66;
 
-  --color-sage: #34412C;
-  --color-sage-ink: #C9D6BE;
-  --color-lavender: #2C2A45;
-  --color-lavender-ink: #C9C6EE;
+  --color-teal: #2DD4C6;
+  --color-teal-ink: #B6F3EC;
+  --color-teal-soft: #123A36;
 
-  --color-muted: #1B1B14;
-  --color-muted-foreground: #ABA997;
-  --color-border-subtle: #33321F;
-  --color-ring: #E8FA55;
+  --color-muted: #10221F;
+  --color-muted-foreground: #9FC4BE;
+  --color-border-subtle: #1B3733;
+  --color-ring: #FF7A3D;
 
   --shadow-soft: 0 20px 44px -18px rgba(0, 0, 0, 0.6);
   --shadow-soft-sm: 0 10px 24px -12px rgba(0, 0, 0, 0.55);
@@ -82,27 +80,26 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --color-primary: #F7F7F2;
-    --color-on-primary: #121210;
-    --color-background: #14140F;
-    --color-foreground: #F5F4EC;
-    --color-card: #1E1E16;
-    --color-card-foreground: #F5F4EC;
+    --color-primary: #EAF7F5;
+    --color-on-primary: #06110F;
+    --color-background: #06110F;
+    --color-foreground: #EAF7F5;
+    --color-card: #0E211E;
+    --color-card-foreground: #EAF7F5;
 
-    --color-accent: #E8FA55;
-    --color-accent-ink: #121210;
-    --color-accent-soft: #2A2D14;
-    --color-accent-text: #E8FA55;
+    --color-accent: #FF7A3D;
+    --color-accent-ink: #1C0900;
+    --color-accent-soft: #3A1D0E;
+    --color-accent-text: #FF9A66;
 
-    --color-sage: #34412C;
-    --color-sage-ink: #C9D6BE;
-    --color-lavender: #2C2A45;
-    --color-lavender-ink: #C9C6EE;
+    --color-teal: #2DD4C6;
+    --color-teal-ink: #B6F3EC;
+    --color-teal-soft: #123A36;
 
-    --color-muted: #1B1B14;
-    --color-muted-foreground: #ABA997;
-    --color-border-subtle: #33321F;
-    --color-ring: #E8FA55;
+    --color-muted: #10221F;
+    --color-muted-foreground: #9FC4BE;
+    --color-border-subtle: #1B3733;
+    --color-ring: #FF7A3D;
 
     --shadow-soft: 0 20px 44px -18px rgba(0, 0, 0, 0.6);
     --shadow-soft-sm: 0 10px 24px -12px rgba(0, 0, 0, 0.55);
@@ -158,7 +155,7 @@ input, textarea { font: inherit; color: inherit; }
 }
 .icon-sm { width: 14px; height: 14px; }
 
-/* Circular chip button — the RentEase "black circle + white arrow" motif */
+/* Circular chip button */
 .icon-chip {
   display: inline-flex;
   align-items: center;
@@ -338,13 +335,50 @@ a:hover .icon-chip,
   inset: -20% -10% auto -10%;
   height: 620px;
   background:
-    radial-gradient(420px 320px at 18% 30%, var(--color-accent-soft) 0%, transparent 70%),
-    radial-gradient(360px 300px at 82% 10%, var(--color-sage) 0%, transparent 65%);
+    radial-gradient(420px 320px at 18% 30%, var(--color-teal-soft) 0%, transparent 70%),
+    radial-gradient(360px 300px at 82% 10%, var(--color-accent-soft) 0%, transparent 65%);
   opacity: 0.9;
-  z-index: -1;
+  z-index: -2;
   pointer-events: none;
 }
+
+/* Pulsing pixel-mosaic decoration — small outlined squares fading in/out at
+   staggered delays; degrades to a plain static scatter under reduced motion. */
+.pixel-field {
+  position: absolute;
+  inset: -6% -4% auto auto;
+  top: -4%;
+  right: -2%;
+  width: min(560px, 60vw);
+  height: 320px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 10px;
+  z-index: -1;
+  pointer-events: none;
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+.px {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 5px;
+  border: 1.5px solid currentColor;
+  opacity: 0.18;
+  animation: pixelPulse 3.4s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 130ms);
+}
+.px:nth-child(3n) { color: var(--color-teal); }
+.px:nth-child(3n+1) { color: var(--color-accent); }
+.px:nth-child(3n+2) { color: var(--color-muted-foreground); opacity: 0.12; }
+.px:nth-child(5n) { border-radius: 50%; }
+@keyframes pixelPulse {
+  0%, 100% { opacity: 0.12; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
 .hero-inner {
+  position: relative;
   padding-block: var(--space-8) var(--space-6);
 }
 .eyebrow {
@@ -415,13 +449,41 @@ section[id] { scroll-margin-top: 90px; }
 
 .section { padding-block: var(--space-8); }
 .section-muted { background: var(--color-muted); }
+
+/* Section kicker: icon badge + numeric index + label, in one row */
+.section-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: var(--space-1);
+}
+.kicker-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: var(--radius-full);
+  background: var(--color-teal-soft);
+  color: var(--color-teal-ink);
+}
+.kicker-icon .icon { width: 15px; height: 15px; stroke-width: 2.25; }
+.kicker-index {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
 .section-label {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.8125rem;
   color: var(--color-accent-text);
-  margin-bottom: var(--space-1);
+  margin: 0;
 }
 .section-title {
   font-size: clamp(1.75rem, 3vw + 1rem, 2.75rem);
@@ -444,8 +506,8 @@ section[id] { scroll-margin-top: 90px; }
 .media-block {
   aspect-ratio: 1;
   border-radius: var(--radius-lg);
-  background: var(--color-sage);
-  color: var(--color-sage-ink);
+  background: var(--color-teal-soft);
+  color: var(--color-teal-ink);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -494,8 +556,8 @@ section[id] { scroll-margin-top: 90px; }
   padding: 0 0.5rem;
 }
 .facts li:nth-child(1) .facts-num { background: var(--color-accent-soft); color: var(--color-accent-text); }
-.facts li:nth-child(2) .facts-num { background: var(--color-sage); color: var(--color-sage-ink); }
-.facts li:nth-child(3) .facts-num { background: var(--color-lavender); color: var(--color-lavender-ink); }
+.facts li:nth-child(2) .facts-num { background: var(--color-teal-soft); color: var(--color-teal-ink); }
+.facts li:nth-child(3) .facts-num { background: var(--color-muted); color: var(--color-muted-foreground); }
 .facts li span:last-child {
   font-size: 0.875rem;
   color: var(--color-muted-foreground);
@@ -581,24 +643,29 @@ section[id] { scroll-margin-top: 90px; }
   transition: transform 400ms var(--ease);
 }
 .work-card:hover .work-thumb img { transform: scale(1.04); }
-.work-thumb span {
+
+/* Index tag — bold outlined "001" style numeral instead of a plain badge */
+.work-thumb .index-tag {
   position: absolute;
   top: var(--space-2);
   left: var(--space-2);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(247, 247, 242, 0.9);
-  color: var(--color-primary);
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid rgba(243, 251, 250, 0.85);
+  background: rgba(11, 36, 34, 0.55);
+  backdrop-filter: blur(2px);
+  color: #F3FBFA;
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 0.9375rem;
+  font-size: 0.8125rem;
+  letter-spacing: 0.03em;
   font-variant-numeric: tabular-nums;
-  box-shadow: var(--shadow-soft-sm);
 }
+.work-card:nth-child(3n+1) .index-tag { border-color: var(--color-accent); }
+.work-card:nth-child(3n+2) .index-tag { border-color: var(--color-teal); }
 
 .work-body { padding: var(--space-3); }
 .work-heading {
@@ -636,10 +703,14 @@ section[id] { scroll-margin-top: 90px; }
   .skills-grid { grid-template-columns: repeat(3, 1fr); }
 }
 .skills-group h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 1.125rem;
   font-weight: 600;
   margin-bottom: var(--space-2);
 }
+.skills-group h3 .icon-chip-sm { background: var(--color-teal); color: var(--color-on-primary); }
 .tag-list {
   display: flex;
   flex-wrap: wrap;
@@ -654,39 +725,8 @@ section[id] { scroll-margin-top: 90px; }
   box-shadow: var(--shadow-soft-sm);
 }
 .skills-group:nth-child(1) .tag-list li { background: var(--color-accent-soft); }
-.skills-group:nth-child(2) .tag-list li { background: var(--color-sage); color: var(--color-sage-ink); }
-.skills-group:nth-child(3) .tag-list li { background: var(--color-lavender); color: var(--color-lavender-ink); }
-
-/* Testimonials */
-.testimonial-grid {
-  display: grid;
-  gap: var(--space-3);
-}
-@media (min-width: 768px) {
-  .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
-}
-.testimonial-card {
-  margin: 0;
-  padding: var(--space-4);
-  border-radius: var(--radius-lg);
-  background: var(--color-card);
-  color: var(--color-card-foreground);
-  box-shadow: var(--shadow-soft-sm);
-}
-.testimonial-card blockquote {
-  margin: 0 0 var(--space-3);
-  font-size: 1.1875rem;
-  font-family: var(--font-heading);
-  font-weight: 500;
-  line-height: 1.45;
-}
-.testimonial-card figcaption {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.9375rem;
-}
-.t-name { font-weight: 700; }
-.t-role { color: var(--color-muted-foreground); }
+.skills-group:nth-child(2) .tag-list li { background: var(--color-teal-soft); color: var(--color-teal-ink); }
+.skills-group:nth-child(3) .tag-list li { background: var(--color-muted); color: var(--color-muted-foreground); }
 
 /* Contact */
 .contact-grid {
