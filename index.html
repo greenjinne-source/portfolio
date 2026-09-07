@@ -582,6 +582,22 @@
     </section>
   </main>
 
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр изображения" hidden>
+    <button class="lightbox-btn lightbox-close" type="button" aria-label="Закрыть">
+      <svg class="icon" aria-hidden="true"><use href="#icon-close"/></svg>
+    </button>
+    <button class="lightbox-btn lightbox-prev" type="button" aria-label="Предыдущее изображение">
+      <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right" transform="rotate(180 12 12)"/></svg>
+    </button>
+    <button class="lightbox-btn lightbox-next" type="button" aria-label="Следующее изображение">
+      <svg class="icon" aria-hidden="true"><use href="#icon-arrow-right"/></svg>
+    </button>
+    <div class="lightbox-content">
+      <img class="lightbox-img" src="" alt="" />
+      <p class="lightbox-caption"></p>
+    </div>
+  </div>
+
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <p>&copy; <span id="year"></span> Евгений Мелёхин. Все права защищены.</p>

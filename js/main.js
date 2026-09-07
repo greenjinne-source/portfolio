@@ -164,4 +164,100 @@
   /* ---------- Footer year ---------- */
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  /* ---------- Gallery lightbox ---------- */
+  const lightbox = document.getElementById("lightbox");
+
+  if (lightbox) {
+    const lightboxImg = lightbox.querySelector(".lightbox-img");
+    const lightboxCaption = lightbox.querySelector(".lightbox-caption");
+    const closeBtn = lightbox.querySelector(".lightbox-close");
+    const prevBtn = lightbox.querySelector(".lightbox-prev");
+    const nextBtn = lightbox.querySelector(".lightbox-next");
+
+    let currentItems = [];
+    let currentIndex = 0;
+    let lastFocused = null;
+
+    function renderSlide() {
+      const item = currentItems[currentIndex];
+      if (!item) return;
+      lightboxImg.src = item.src;
+      lightboxImg.alt = item.alt;
+      lightboxCaption.textContent = item.caption;
+    }
+
+    function openLightbox(items, index, triggerEl) {
+      currentItems = items;
+      currentIndex = index;
+      lastFocused = triggerEl || document.activeElement;
+      renderSlide();
+      lightbox.hidden = false;
+      document.body.style.overflow = "hidden";
+      closeBtn.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.hidden = true;
+      document.body.style.overflow = "";
+      lightboxImg.src = "";
+      if (lastFocused && typeof lastFocused.focus === "function") {
+        lastFocused.focus();
+      }
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % currentItems.length;
+      renderSlide();
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + currentItems.length) % currentItems.length;
+      renderSlide();
+    }
+
+    document.querySelectorAll(".gallery-grid").forEach((grid) => {
+      const figures = Array.from(grid.querySelectorAll(".gallery-item"));
+      const items = figures.map((fig) => {
+        const img = fig.querySelector("img");
+        const caption = fig.querySelector("figcaption");
+        return {
+          src: img ? img.src : "",
+          alt: img ? img.alt : "",
+          caption: caption ? caption.textContent : "",
+        };
+      });
+
+      figures.forEach((fig, index) => {
+        fig.setAttribute("tabindex", "0");
+        fig.setAttribute("role", "button");
+        fig.setAttribute("aria-label", "Открыть изображение крупнее");
+
+        const open = () => openLightbox(items, index, fig);
+
+        fig.addEventListener("click", open);
+        fig.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            open();
+          }
+        });
+      });
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+    nextBtn.addEventListener("click", showNext);
+    prevBtn.addEventListener("click", showPrev);
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (lightbox.hidden) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") showNext();
+      if (e.key === "ArrowLeft") showPrev();
+    });
+  }
 })();
