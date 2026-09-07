@@ -584,6 +584,7 @@ section[id] { scroll-margin-top: 90px; }
   line-height: 1.1;
   padding: 0 0.5rem;
 }
+.facts-num .icon { width: 34px; height: 34px; stroke-width: 1.75; }
 .facts li:nth-child(1) .facts-num { background: var(--color-accent-soft); color: var(--color-accent-text); }
 .facts li:nth-child(2) .facts-num { background: var(--color-teal-soft); color: var(--color-teal-ink); }
 .facts li:nth-child(3) .facts-num { background: var(--color-muted); color: var(--color-muted-foreground); }
