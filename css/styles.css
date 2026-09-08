@@ -581,7 +581,9 @@ section[id] { scroll-margin-top: 90px; }
   align-items: start;
 }
 @media (min-width: 768px) {
-  .about-grid { grid-template-columns: 300px 1fr; }
+  /* minmax(0, 1fr) so the text column can shrink below its content's
+     min-content width instead of pushing the grid past the viewport. */
+  .about-grid { grid-template-columns: 300px minmax(0, 1fr); }
 }
 .media-block {
   aspect-ratio: 1;
@@ -608,41 +610,56 @@ section[id] { scroll-margin-top: 90px; }
   max-width: 62ch;
   font-size: var(--text-md);
 }
+/* Services grid — reflows from three per row on a phone to a full band on
+   desktop, so the list grows without the circles shrinking out of rhythm. */
 .facts {
-  display: flex;
-  gap: var(--space-3);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+  gap: var(--space-3) var(--space-2);
   margin-top: var(--space-4);
-  flex-wrap: wrap;
 }
 .facts li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
-  width: 108px;
+  gap: 0.55rem;
 }
 .facts-num {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 84px;
-  height: 84px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
   font-family: var(--font-heading);
   font-weight: 600;
   font-size: var(--text-sm);
-  line-height: 1.1;
+  line-height: var(--leading-tight);
   padding: 0 0.5rem;
 }
-.facts-num .icon { width: 34px; height: 34px; stroke-width: 1.75; }
-.facts li:nth-child(1) .facts-num { background: var(--color-accent-soft); color: var(--color-accent-text); }
-.facts li:nth-child(2) .facts-num { background: var(--color-teal-soft); color: var(--color-teal-ink); }
-.facts li:nth-child(3) .facts-num { background: var(--color-muted); color: var(--color-muted-foreground); }
+.facts-num .icon { width: 30px; height: 30px; stroke-width: 1.75; }
+/* Three-colour rotation so the row keeps its rhythm at any list length. */
+.facts li:nth-child(3n + 1) .facts-num { background: var(--color-accent-soft); color: var(--color-accent-text); }
+.facts li:nth-child(3n + 2) .facts-num { background: var(--color-teal-soft); color: var(--color-teal-ink); }
+.facts li:nth-child(3n) .facts-num { background: var(--color-muted); color: var(--color-muted-foreground); }
 .facts li span:last-child {
-  font-size: 0.875rem;
+  font-size: var(--text-2xs);
+  line-height: var(--leading-snug);
   color: var(--color-muted-foreground);
   text-align: center;
+  text-wrap: balance;
+}
+@media (min-width: 768px) {
+  /* Cap the track width so the band settles at five per row (5 + 5) rather
+     than a ragged seven-then-three. */
+  .facts {
+    grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+    max-width: 640px;
+  }
+  .facts-num { width: 76px; height: 76px; }
+  .facts-num .icon { width: 32px; height: 32px; }
+  .facts li span:last-child { font-size: var(--text-xs); }
 }
 
 /* Case gallery (e.g. "all work for a brand") */
