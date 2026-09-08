@@ -76,6 +76,17 @@
   const revealEls = document.querySelectorAll(".reveal");
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* Stagger siblings so a grid of cards arrives as a sequence rather than a
+     single flash — capped so a long list never leaves the viewer waiting. */
+  revealEls.forEach((el) => {
+    const siblings = Array.from(el.parentElement ? el.parentElement.children : []).filter((n) =>
+      n.classList.contains("reveal")
+    );
+    if (siblings.length > 1) {
+      el.style.setProperty("--reveal-order", String(Math.min(siblings.indexOf(el), 5)));
+    }
+  });
+
   if (prefersReducedMotion || !("IntersectionObserver" in window)) {
     revealEls.forEach((el) => el.classList.add("is-visible"));
   } else {
