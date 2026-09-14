@@ -1,9 +1,15 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Мелёхин · Печатный лист</title>
-
+<meta name="description" content="Портфолио графического дизайнера Евгения Мелёхина: упаковка и этикетка, полиграфия, карточки для маркетплейсов, съёмка и ретушь, презентации." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..800&family=JetBrains+Mono:wght@400;500;700&family=Unbounded:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
+</head>
+<body>
 <style>
 /* ============================================================
    ЕВГЕНИЙ МЕЛЁХИН — портфолио
@@ -101,6 +107,8 @@ body {
   overflow-x: hidden;
 }
 img { display: block; max-width: 100%; }
+/* без этого скрытые оверлеи показываются поверх страницы на обычном хостинге */
+[hidden] { display: none !important; }
 a { color: inherit; text-decoration: none; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 p { margin: 0; }
@@ -1981,3 +1989,5 @@ a.crow:hover .crow__v { color: var(--accent); }
   if (y) y.textContent = String(new Date().getFullYear());
 })();
 </script>
+</body>
+</html>
