@@ -152,9 +152,22 @@ section[id] { scroll-margin-top: 84px; }
 /* ---------- цветовая шкала (печатный контрольный клин) ---------- */
 .press-rule {
   display: flex; align-items: center; gap: 0;
-  margin-block: var(--s3) var(--s4);
+  margin-block: calc(var(--s3) + .7rem) var(--s4);
 }
-.press-rule i { display: block; width: 26px; height: 7px; flex: none; }
+.press-rule i { display: block; position: relative; width: 26px; height: 7px; flex: none; }
+/* подписи красок, как на контрольном клине печатного листа */
+.press-rule i::before {
+  position: absolute; bottom: calc(100% + 3px); left: 0; right: 0;
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .12em;
+  line-height: 1; text-align: center; color: var(--ink-soft);
+}
+.press-rule i:nth-child(1)::before { content: "C"; }
+.press-rule i:nth-child(2)::before { content: "M"; }
+.press-rule i:nth-child(3)::before { content: "Y"; }
+.press-rule i:nth-child(4)::before { content: "K"; }
+.press-rule i:nth-child(5)::before { content: "R"; }
+.press-rule i:nth-child(6)::before { content: "G"; }
+.press-rule i:nth-child(7)::before { content: "B"; }
 .press-rule i:nth-child(1) { background: var(--c); }
 .press-rule i:nth-child(2) { background: var(--m); }
 .press-rule i:nth-child(3) { background: var(--y); }
@@ -163,6 +176,33 @@ section[id] { scroll-margin-top: 84px; }
 .press-rule i:nth-child(6) { background: #009B58; }
 .press-rule i:nth-child(7) { background: #2E3192; }
 .press-rule span { flex: 1; height: 1px; background: var(--rule); margin-left: 12px; }
+
+/* ---------- рамка печатного листа с метками реза ---------- */
+.sheet {
+  position: fixed; inset: clamp(13px, 1.6vw, 22px);
+  border: 1px solid var(--rule); pointer-events: none; z-index: 200;
+}
+.sheet i { position: absolute; width: 0; height: 0; }
+.sheet i::before, .sheet i::after {
+  content: ""; position: absolute; background: var(--ink-soft); opacity: .7;
+}
+/* штрихи уходят за линию реза, как на спуске полос */
+.sheet i::before { width: 9px; height: 1px; }
+.sheet i::after  { width: 1px; height: 9px; }
+.sheet i:nth-child(1) { top: -1px; left: -1px; }
+.sheet i:nth-child(1)::before { top: 0; right: 4px; }
+.sheet i:nth-child(1)::after  { left: 0; bottom: 4px; }
+.sheet i:nth-child(2) { top: -1px; right: -1px; }
+.sheet i:nth-child(2)::before { top: 0; left: 4px; }
+.sheet i:nth-child(2)::after  { right: 0; bottom: 4px; }
+.sheet i:nth-child(3) { bottom: -1px; left: -1px; }
+.sheet i:nth-child(3)::before { bottom: 0; right: 4px; }
+.sheet i:nth-child(3)::after  { left: 0; top: 4px; }
+.sheet i:nth-child(4) { bottom: -1px; right: -1px; }
+.sheet i:nth-child(4)::before { bottom: 0; left: 4px; }
+.sheet i:nth-child(4)::after  { right: 0; top: 4px; }
+@media (max-width: 640px) { .sheet { display: none; } }
+@media print { .sheet { display: none; } }
 
 /* ---------- типографика ---------- */
 .h-hero {
@@ -393,45 +433,6 @@ table.fmt td.f { font-family: var(--mono); font-size: .78rem; color: var(--ink-s
   max-width: 68ch;
 }
 
-/* ---------- карточки маркетплейса ---------- */
-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--s2); }
-.pcard {
-  display: flex; flex-direction: column;
-  background: var(--paper); border: 1px solid var(--rule);
-  transition: border-color .25s var(--ease), transform .25s var(--ease);
-}
-.section--tint .pcard { background: var(--paper); }
-.pcard:hover { border-color: var(--ink); transform: translateY(-3px); }
-.pcard__media { position: relative; background: var(--paper-3); }
-.pcard__media img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
-.pcard__niche {
-  position: absolute; top: 0; left: 0;
-  font-family: var(--mono); font-size: .625rem; letter-spacing: .12em; text-transform: uppercase;
-  background: var(--ink); color: var(--paper); padding: .35rem .6rem;
-}
-.pcard__badge {
-  position: absolute; top: 0; right: 0;
-  font-family: var(--mono); font-size: .6875rem; font-weight: 700; letter-spacing: .06em;
-  background: var(--accent-fill); color: #fff; padding: .35rem .6rem;
-}
-.pcard__usp {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  display: flex; flex-wrap: wrap; gap: 3px; padding: 8px;
-}
-.pcard__usp span {
-  font-family: var(--mono); font-size: .625rem; letter-spacing: .04em;
-  background: color-mix(in srgb, #16171A 78%, transparent); color: #fff;
-  padding: .25rem .45rem; backdrop-filter: blur(3px);
-}
-.pcard__body { padding: .85rem .9rem 1rem; display: flex; flex-direction: column; gap: .55rem; flex: 1; }
-.pcard__brand { font-family: var(--mono); font-size: .6875rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
-.pcard__name { font-size: .9375rem; font-weight: 600; line-height: 1.35; }
-.pcard__rate { display: flex; align-items: center; gap: .4rem; font-family: var(--mono); font-size: .72rem; color: var(--ink-soft); }
-.pcard__rate b { color: var(--ink); font-weight: 700; }
-.pcard__rate svg { width: 12px; height: 12px; fill: var(--y); stroke: none; }
-.pcard__price { display: flex; align-items: baseline; gap: .5rem; margin-top: auto; padding-top: .3rem; }
-.pcard__now { font-family: var(--display); font-weight: 600; font-size: 1.2rem; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-.pcard__was { font-family: var(--mono); font-size: .8rem; color: var(--ink-soft); text-decoration: line-through; }
 
 /* ---------- медиа-блоки ---------- */
 .media2 { display: grid; gap: var(--s2); grid-template-columns: 1fr; }
@@ -509,10 +510,10 @@ a.crow:hover .crow__v { color: var(--accent); }
   <symbol id="i-play" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="1.5"/><path d="M10 9.5 15 12l-5 2.5z"/></symbol>
   <symbol id="i-deck" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M12 16v4M8.5 20h7"/></symbol>
   <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20H4z"/><path d="M9.5 20v-6h5v6"/></symbol>
-  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.6 5.7 6.2.7-4.6 4.2 1.2 6.1L12 16.8 6.6 19.7l1.2-6.1L3.2 9.4l6.2-.7z"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="1"/><path d="m3 7 9 6 9-6"/></symbol>
 </svg>
 
+<div class="sheet" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 <header class="hdr">
   <div class="wrap hdr__in">
     <a class="mark" href="#top">
@@ -524,7 +525,6 @@ a.crow:hover .crow__v { color: var(--accent); }
         <li><a href="#about">Обо мне</a></li>
         <li><a href="#expertise">Экспертиза</a></li>
         <li><a href="#work">Работы</a></li>
-        <li><a href="#cards">Карточки</a></li>
         <li><a href="#media">Фото и медиа</a></li>
         <li><a href="#decks">Презентации</a></li>
         <li><a href="#contact">Контакты</a></li>
@@ -1072,141 +1072,7 @@ a.crow:hover .crow__v { color: var(--accent); }
   </div>
 </section>
 
-<!-- ========== КОНЦЕПТЫ ПОДАЧИ ========== -->
-<section class="section">
-  <div class="wrap">
-    <p class="slug">Концепты подачи</p>
-    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span></span></div>
-    <h2 class="h-sec">Как выглядит премиальная подача</h2>
-    <p class="lede" style="margin-top:var(--s2)">
-      Учебные концепты, собранные под этот сайт: показывают уровень подачи
-      и материалы, с которыми работаю, — тиснение, фольга, дизайнерский картон,
-      крупный формат.
-    </p>
-    <p class="note" style="margin-top:var(--s3)">
-      Это концепты, а не клиентские проекты. Марки и знаки на макетах вымышленные.
-    </p>
 
-    <div class="gal gal--wide" style="margin-top:var(--s4)">
-      <figure class="shot"><img src="img/print-packaging.jpg" alt="Концепт подарочной упаковки: коробки и тубус с блинтовым тиснением" loading="lazy" /><figcaption><b>Подарочная упаковка</b><em>концепт</em></figcaption></figure>
-      <figure class="shot"><img src="img/print-editorial.jpg" alt="Концепт брендбука и каталога с бронзовой фольгой" loading="lazy" /><figcaption><b>Брендбук и каталог</b><em>концепт</em></figcaption></figure>
-      <figure class="shot"><img src="img/print-stickers.jpg" alt="Концепт набора стикеров и этикеток с тиснением" loading="lazy" /><figcaption><b>Стикеры и этикетки</b><em>концепт</em></figcaption></figure>
-      <figure class="shot"><img src="img/print-banner.jpg" alt="Концепт крупноформатных баннеров и ролл-апов в шоуруме" loading="lazy" /><figcaption><b>Баннеры и ролл-апы</b><em>концепт</em></figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<!-- ========== КАРТОЧКИ ТОВАРОВ ========== -->
-<section class="section section--tint" id="cards">
-  <div class="wrap">
-    <p class="slug">E-commerce · карточки товаров</p>
-    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span></span></div>
-    <h2 class="h-sec">Карточки для маркетплейсов — от фешена до электроники</h2>
-    <p class="lede" style="margin-top:var(--s2)">
-      Одна сетка, один принцип иерархии, разные категории. Ниша меняет тон
-      съёмки и набор УТП, но структура карточки остаётся читаемой: что это,
-      чем лучше, сколько стоит.
-    </p>
-    <p class="note" style="margin-top:var(--s3)">
-      Условные примеры. Бренды, товары, цены и рейтинги вымышлены и показывают
-      только подход к вёрстке карточки.
-    </p>
-
-    <div class="cards" style="margin-top:var(--s6)">
-
-      <article class="pcard">
-        <div class="pcard__media">
-          <img src="img/ecom-fashion.jpg" alt="Кожаная сумка-тоут карамельного цвета на гипсовом подиуме" loading="lazy" />
-          <span class="pcard__niche">Fashion</span>
-          <span class="pcard__badge">ХИТ</span>
-          <div class="pcard__usp"><span>Натуральная кожа</span><span>Ручная сборка</span></div>
-        </div>
-        <div class="pcard__body">
-          <div class="pcard__brand">Ferrata</div>
-          <div class="pcard__name">Сумка-тоут Milano, гладкая кожа</div>
-          <div class="pcard__rate"><svg><use href="#i-star"/></svg><b>4,8</b> · 312 отзывов</div>
-          <div class="pcard__price"><span class="pcard__now">12 490 ₽</span><span class="pcard__was">18 900 ₽</span></div>
-        </div>
-      </article>
-
-      <article class="pcard">
-        <div class="pcard__media">
-          <img src="img/ecom-beauty.jpg" alt="Сыворотка во флаконе матового стекла на травертине" loading="lazy" />
-          <span class="pcard__niche">Beauty</span>
-          <span class="pcard__badge">NEW</span>
-          <div class="pcard__usp"><span>Ниацинамид 10%</span><span>Без отдушек</span></div>
-        </div>
-        <div class="pcard__body">
-          <div class="pcard__brand">Lumea</div>
-          <div class="pcard__name">Сыворотка выравнивающая, 30 мл</div>
-          <div class="pcard__rate"><svg><use href="#i-star"/></svg><b>4,9</b> · 1 204 отзыва</div>
-          <div class="pcard__price"><span class="pcard__now">2 190 ₽</span><span class="pcard__was">2 890 ₽</span></div>
-        </div>
-      </article>
-
-      <article class="pcard">
-        <div class="pcard__media">
-          <img src="img/ecom-tech.jpg" alt="Полноразмерные беспроводные наушники графитового цвета" loading="lazy" />
-          <span class="pcard__niche">Электроника</span>
-          <span class="pcard__badge">−30%</span>
-          <div class="pcard__usp"><span>Шумодав ANC</span><span>40 ч работы</span></div>
-        </div>
-        <div class="pcard__body">
-          <div class="pcard__brand">Sonora</div>
-          <div class="pcard__name">Наушники ANC-700, полноразмерные</div>
-          <div class="pcard__rate"><svg><use href="#i-star"/></svg><b>4,7</b> · 856 отзывов</div>
-          <div class="pcard__price"><span class="pcard__now">14 900 ₽</span><span class="pcard__was">21 300 ₽</span></div>
-        </div>
-      </article>
-
-      <article class="pcard">
-        <div class="pcard__media">
-          <img src="img/ecom-food.jpg" alt="Банка мёда янтарного стекла с деревянной ложкой" loading="lazy" />
-          <span class="pcard__niche">Продукты</span>
-          <span class="pcard__badge">ЭКО</span>
-          <div class="pcard__usp"><span>Разнотравье</span><span>Без пастеризации</span></div>
-        </div>
-        <div class="pcard__body">
-          <div class="pcard__brand">Медовый Дол</div>
-          <div class="pcard__name">Мёд разнотравье, стекло, 500 г</div>
-          <div class="pcard__rate"><svg><use href="#i-star"/></svg><b>4,9</b> · 2 431 отзыв</div>
-          <div class="pcard__price"><span class="pcard__now">690 ₽</span><span class="pcard__was">890 ₽</span></div>
-        </div>
-      </article>
-
-      <article class="pcard">
-        <div class="pcard__media">
-          <img src="img/ecom-sport.jpg" alt="Беговые кроссовки в цветах айвори и шалфей" loading="lazy" />
-          <span class="pcard__niche">Спорт</span>
-          <span class="pcard__badge">ТОП</span>
-          <div class="pcard__usp"><span>Вес 248 г</span><span>Пена EVA</span></div>
-        </div>
-        <div class="pcard__body">
-          <div class="pcard__brand">Trailform</div>
-          <div class="pcard__name">Кроссовки Aero Run, шоссе</div>
-          <div class="pcard__rate"><svg><use href="#i-star"/></svg><b>4,6</b> · 1 087 отзывов</div>
-          <div class="pcard__price"><span class="pcard__now">8 990 ₽</span><span class="pcard__was">12 400 ₽</span></div>
-        </div>
-      </article>
-
-      <article class="pcard">
-        <div class="pcard__media">
-          <img src="img/ecom-home.jpg" alt="Настольная лампа с алебастровым плафоном и латунной ножкой" loading="lazy" />
-          <span class="pcard__niche">Дом</span>
-          <span class="pcard__badge">PREMIUM</span>
-          <div class="pcard__usp"><span>Алебастр</span><span>Тёплый свет 2700K</span></div>
-        </div>
-        <div class="pcard__body">
-          <div class="pcard__brand">Alba</div>
-          <div class="pcard__name">Лампа настольная Onda, латунь</div>
-          <div class="pcard__rate"><svg><use href="#i-star"/></svg><b>4,8</b> · 198 отзывов</div>
-          <div class="pcard__price"><span class="pcard__now">24 500 ₽</span><span class="pcard__was">29 900 ₽</span></div>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
 
 <style>
 .mgrid { display: grid; gap: var(--s2); grid-template-columns: 1fr; }
