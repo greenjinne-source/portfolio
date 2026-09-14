@@ -370,23 +370,6 @@ section[id] { scroll-margin-top: 84px; }
 .lvl__bar i.on { background: var(--accent-fill); }
 .lvl:hover .lvl__bar i.on { background: var(--accent); }
 
-/* ---------- карьерная шкала ---------- */
-.gantt { display: grid; gap: var(--s2); }
-.gantt__axis {
-  position: relative; height: 22px; border-bottom: 1px solid var(--rule);
-  font-family: var(--mono); font-size: .6875rem; color: var(--ink-soft);
-}
-.gantt__axis b { position: absolute; bottom: 4px; transform: translateX(-50%); font-weight: 400; }
-.gantt__axis b::after { content: ""; position: absolute; left: 50%; bottom: -5px; width: 1px; height: 4px; background: var(--rule); }
-.gjob { display: grid; grid-template-columns: 1fr; gap: .35rem; }
-.gjob__top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .3rem 1rem; align-items: baseline; }
-.gjob__name { font-weight: 600; font-size: .9375rem; }
-.gjob__when { font-family: var(--mono); font-size: .75rem; color: var(--ink-soft); }
-.gjob__track { position: relative; height: 12px; background: var(--rule-soft); }
-.gjob__fill { position: absolute; top: 0; bottom: 0; background: var(--accent-fill); }
-.gjob:hover .gjob__fill { background: var(--accent); }
-.gjob__role { font-size: .875rem; color: var(--ink-soft); }
-
 /* ---------- вехи обучения ---------- */
 .miles { display: grid; gap: 0; border-top: 1px solid var(--rule); }
 .mile {
@@ -610,16 +593,6 @@ a.crow:hover .crow__v { color: var(--accent); }
 </section>
 
 <style>
-/* доп. правила для карьерной шкалы */
-.gantt__years { display: flex; margin-bottom: .4rem; }
-.gantt__years b {
-  flex: 1; text-align: center; font-weight: 400;
-  font-family: var(--mono); font-size: .6875rem; letter-spacing: .06em; color: var(--ink-soft);
-}
-.gjob__track {
-  background-color: var(--rule-soft);
-  background-image: repeating-linear-gradient(to right, var(--rule) 0 1px, transparent 1px 25%);
-}
 .lvl-legend {
   display: flex; flex-wrap: wrap; gap: .3rem 1.1rem; margin-top: var(--s3);
   font-family: var(--mono); font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft);
@@ -628,6 +601,22 @@ a.crow:hover .crow__v { color: var(--accent); }
 .lvl-legend i.off { background: var(--rule); }
 .two { display: grid; gap: var(--s6); }
 @media (min-width: 860px) { .two { grid-template-columns: 1fr 1fr; gap: var(--s8); } }
+/* ---------- фриланс по направлениям ---------- */
+.freel { border-top: 1px solid var(--rule); }
+.freel__row {
+  display: grid; gap: .35rem var(--s3);
+  padding-block: var(--s2); border-bottom: 1px solid var(--rule-soft);
+}
+.freel__row { grid-template-columns: 2.5rem 1fr; }
+.freel__n { grid-row: span 2; }
+.freel__n { font-family: var(--mono); font-size: .75rem; font-weight: 500; letter-spacing: .05em; color: var(--accent); }
+.freel__t { font-weight: 600; font-size: .9375rem; }
+.freel__t span {
+  display: block; margin-top: .15rem;
+  font-family: var(--mono); font-size: .6875rem; font-weight: 400;
+  letter-spacing: .05em; text-transform: uppercase; color: var(--ink-soft);
+}
+.freel__d { font-size: .875rem; line-height: 1.6; color: var(--ink-2); max-width: 62ch; }
 .blockhead { margin-bottom: var(--s3); }
 .blockhead h3 { font-family: var(--display); font-weight: 500; font-size: 1.15rem; letter-spacing: -.01em; }
 .blockhead p { margin-top: .35rem; font-size: .875rem; color: var(--ink-soft); max-width: 48ch; }
@@ -688,7 +677,7 @@ a.crow:hover .crow__v { color: var(--accent); }
   <div class="wrap">
     <p class="slug">Экспертиза в цифрах</p>
     <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span></span></div>
-    <h2 class="h-sec">Что стоит за четырнадцатью годами</h2>
+    <h2 class="h-sec">Что стоит за этим опытом</h2>
 
     <div class="two" style="margin-top:var(--s6)">
 
@@ -758,52 +747,6 @@ a.crow:hover .crow__v { color: var(--accent); }
           <span><i></i><i></i><i></i>Продвинутый</span>
           <span><i></i><i></i><i></i><i></i>Экспертный</span>
         </p>
-      </div>
-
-      <!-- карьера и обучение -->
-      <div>
-        <div class="blockhead">
-          <h3>Места работы по трудовой книжке</h3>
-          <p>Длина полосы соответствует фактической продолжительности работы. Шкала — с января 2020 по декабрь 2023.</p>
-        </div>
-
-        <div class="gantt">
-          <div class="gantt__years" aria-hidden="true">
-            <b>2020</b><b>2021</b><b>2022</b><b>2023</b>
-          </div>
-
-          <div class="gjob">
-            <div class="gjob__top">
-              <span class="gjob__name">ООО «РСП» — бренд ATEMI</span>
-              <span class="gjob__when">08.2020 — 10.2022 · 27 мес</span>
-            </div>
-            <div class="gjob__track"><span class="gjob__fill" style="left:14.58%;width:56.25%"></span></div>
-            <div class="gjob__role">Графический дизайнер · спортивный инвентарь и экипировка</div>
-          </div>
-
-          <div class="gjob">
-            <div class="gjob__top">
-              <span class="gjob__name">ООО «НОВА-УФ»</span>
-              <span class="gjob__when">06.2023 — 07.2023 · 2 мес</span>
-            </div>
-            <div class="gjob__track"><span class="gjob__fill" style="left:85.42%;width:4.17%"></span></div>
-            <div class="gjob__role">Дизайнер · УФ-печать по хризотилцементным панелям</div>
-          </div>
-
-          <div class="gjob">
-            <div class="gjob__top">
-              <span class="gjob__name">ООО «НОВА-ФАСАД»</span>
-              <span class="gjob__when">08.2023 — 10.2023 · 3 мес</span>
-            </div>
-            <div class="gjob__track"><span class="gjob__fill" style="left:89.58%;width:6.25%"></span></div>
-            <div class="gjob__role">Дизайнер · полиграфия, каталоги, стенды, редизайн сайта</div>
-          </div>
-        </div>
-
-        <p class="note" style="margin-top:var(--s3)">
-          Общий стаж — 14 лет 6 месяцев. На шкале показан последний период;
-          более ранний опыт в трудовой книжке распределён до 2020 года.
-        </p>
 
         <div class="blockhead" style="margin-top:var(--s6)">
           <h3>Профильное обучение</h3>
@@ -828,8 +771,59 @@ a.crow:hover .crow__v { color: var(--accent); }
             <span class="mile__t">Профессия «Графический дизайнер» <span>Программа профессиональной подготовки</span></span>
           </div>
         </div>
+
+      </div>
+
+      <!-- фриланс -->
+      <div>
+      <div class="blockhead">
+        <h3>Фриланс — 16 лет параллельно с наймом</h3>
+        <p>Два разных счёта, а не один: 14 лет 6 месяцев — стаж по трудовой
+          книжке, и сверх этого 16 лет частных заказов. Ниже — по направлениям,
+          из чего этот фриланс складывается.</p>
+      </div>
+
+      <div class="freel">
+        <div class="freel__row">
+          <div class="freel__n">01</div>
+          <div class="freel__t">Полиграфия и фирменный стиль<span>постоянный поток</span></div>
+          <p class="freel__d">Визитки, буклеты, каталоги, календари, плакаты. Логотип и минимальный набор стиля под задачу: знак, цвета, шрифты, шаблоны документов — чтобы заказчик дальше собирал типовые макеты сам.</p>
+        </div>
+        <div class="freel__row">
+          <div class="freel__n">02</div>
+          <div class="freel__t">Упаковка и этикетка<span>производственные клиенты</span></div>
+          <p class="freel__d">Развёртки под штанц-форму, коробки, зип-пакеты, стикеры, маркировка. Работа идёт до цветопробы и подписи в печать, а не до картинки на экране: материал и способ печати обсуждаются с типографией заранее.</p>
+        </div>
+        <div class="freel__row">
+          <div class="freel__n">03</div>
+          <div class="freel__t">Карточки для маркетплейсов<span>линейками, не поштучно</span></div>
+          <p class="freel__d">Инфографика для Ozon и Wildberries: главное фото, УТП, размерные схемы, лайфстайл. Обычно заказывают сразу линейкой — под неё собирается шаблон, чтобы новые позиции добавлялись без переделки.</p>
+        </div>
+        <div class="freel__row">
+          <div class="freel__n">04</div>
+          <div class="freel__t">Фотосъёмка и ретушь<span>свой кадр вместо стока</span></div>
+          <p class="freel__d">Предметная и портретная съёмка, отбор, цветокоррекция, глубокая ретушь. Один и тот же кадр готовится и под печать, и под веб, поэтому каталог и карточка на маркетплейсе не расходятся по цвету.</p>
+        </div>
+        <div class="freel__row">
+          <div class="freel__n">05</div>
+          <div class="freel__t">Иллюстрация и инфографика<span>там, где сток ломает стиль</span></div>
+          <p class="freel__d">Векторная и растровая графика, планшет: иконки, паттерны, схемы, пиктограммы, диаграммы. Сюда же — сборка презентаций и шаблон, по которому заказчик дальше верстает слайды сам.</p>
+        </div>
+        <div class="freel__row">
+          <div class="freel__n">06</div>
+          <div class="freel__t">Интерьер, 3D и ИИ-контент<span>направления последних лет</span></div>
+          <p class="freel__d">Планировки и трёхмерные сцены с прогулкой по ним, визуализации стендов и торгового оборудования. Рядом — монтаж коротких роликов, ИИ-фотосессии и генеративные визуалы под задачу бренда.</p>
+        </div>
+      </div>
+
+      <p class="note" style="margin-top:var(--s3)">
+        Направления перечислены по тому, как часто их заказывают, а не по дате
+        появления. Большинство проектов идёт сразу в нескольких: съёмка, макет
+        и сборка остаются в одних руках.
+      </p>
       </div>
     </div>
+
   </div>
 </section>
 
