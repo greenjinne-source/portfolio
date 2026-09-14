@@ -265,11 +265,19 @@ section[id] { scroll-margin-top: 84px; }
 .mark__name { font-family: var(--display); font-weight: 400; font-size: .95rem; letter-spacing: .02em; }
 .nav ul { display: flex; gap: .15rem; }
 .nav a {
+  position: relative;
   display: block; padding: .5rem .8rem;
   font-size: .875rem; font-weight: 500; color: var(--ink-2);
   transition: color .2s var(--ease), background .2s var(--ease);
 }
 .nav a:hover { color: var(--ink); background: var(--paper-3); }
+/* раздел, в котором читатель находится сейчас */
+.nav a[aria-current] { color: var(--ink); }
+.nav a[aria-current]::after {
+  content: ""; position: absolute;
+  left: .8rem; right: .8rem; bottom: .3rem; height: 2px;
+  background: var(--accent);
+}
 .hdr__act { display: flex; align-items: center; gap: .4rem; }
 .iconbtn {
   width: 40px; height: 40px; display: grid; place-items: center;
@@ -299,6 +307,10 @@ section[id] { scroll-margin-top: 84px; }
   .nav ul { flex-direction: column; gap: 0; }
   .nav a { padding: .85rem 0; font-family: var(--display); font-size: 1.25rem; font-weight: 400; border-bottom: 1px solid var(--rule-soft); }
   .nav a:hover { background: none; }
+  /* в выдвижном меню подчёркивание заменяет цвет: полоска потерялась бы
+     среди разделительных линий списка */
+  .nav a[aria-current] { color: var(--accent); border-bottom-color: var(--accent); }
+  .nav a[aria-current]::after { display: none; }
 }
 
 /* ---------- герой ---------- */
@@ -2014,6 +2026,53 @@ a.crow:hover .crow__v { color: var(--accent); }
     target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
     try { history.replaceState(null, "", "#" + id); } catch (err) {}
   });
+
+  /* --- подсветка раздела, в котором читатель находится --- */
+  var spy = [];
+  if (nav) {
+    Array.prototype.forEach.call(nav.querySelectorAll('a[href^="#"]'), function (a) {
+      var sec = document.getElementById(a.getAttribute("href").slice(1));
+      if (sec) spy.push({ link: a, sec: sec });
+    });
+  }
+
+  if (spy.length) {
+    var hdr = document.querySelector(".hdr");
+    var current = null;
+    var queued = false;
+
+    function markSection() {
+      queued = false;
+      var line = (hdr ? hdr.getBoundingClientRect().height : 0) + 24;
+      var active = null;
+
+      /* У дна страницы последний раздел может так и не дойти до линии —
+         короткие «Контакты» иначе никогда бы не подсветились. */
+      var doc = document.documentElement;
+      if (window.innerHeight + window.pageYOffset >= doc.scrollHeight - 2) {
+        active = spy[spy.length - 1];
+      } else {
+        for (var i = 0; i < spy.length; i++) {
+          if (spy[i].sec.getBoundingClientRect().top <= line) active = spy[i];
+        }
+      }
+
+      if (active === current) return;
+      if (current) current.link.removeAttribute("aria-current");
+      if (active) active.link.setAttribute("aria-current", "true");
+      current = active;
+    }
+
+    function queueMark() {
+      if (queued) return;
+      queued = true;
+      window.requestAnimationFrame(markSection);
+    }
+
+    window.addEventListener("scroll", queueMark, { passive: true });
+    window.addEventListener("resize", queueMark);
+    markSection();
+  }
 
   /* --- год в подвале --- */
   var y = document.getElementById("year");
