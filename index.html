@@ -179,8 +179,10 @@ section[id] { scroll-margin-top: 84px; }
 
 /* ---------- рамка печатного листа с метками реза ---------- */
 .sheet {
-  position: fixed; inset: clamp(13px, 1.6vw, 22px);
-  border: 1px solid var(--rule); pointer-events: none; z-index: 200;
+  position: fixed; inset: clamp(14px, 1.6vw, 22px);
+  /* рамка начинается под шапкой: иначе линия реза режет логотип */
+  top: calc(68px + clamp(14px, 1.6vw, 22px));
+  border: 1px solid var(--rule); pointer-events: none; z-index: 50;
 }
 .sheet i { position: absolute; width: 0; height: 0; }
 .sheet i::before, .sheet i::after {
