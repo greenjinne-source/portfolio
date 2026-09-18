@@ -31,15 +31,15 @@
    ============================================================ */
 
 :root {
-  /* --- бумага и краска (светлая тема — основная) --- */
-  --paper:      #F2F1ED;
-  --paper-2:    #E9E8E3;
-  --paper-3:    #DFDED8;
-  --ink:        #16171A;
-  --ink-2:      #3B3E44;
-  --ink-soft:   #6B7079;
-  --rule:       #CFCEC7;
-  --rule-soft:  #E0DFD9;
+  /* --- бумага и краска (тёмная тема — основная) --- */
+  --paper:      #131417;
+  --paper-2:    #1A1C20;
+  --paper-3:    #23262B;
+  --ink:        #EFEEEA;
+  --ink-2:      #C4C6CA;
+  --ink-soft:   #8F949C;
+  --rule:       #2F333A;
+  --rule-soft:  #23262B;
 
   /* --- триадные краски --- */
   --c: #0090D4;
@@ -48,12 +48,12 @@
   --k: #16171A;
 
   /* --- акцент: рубин (тёмная магента, читаемая как текст) --- */
-  --accent:      #C1005F;
-  --accent-fill: #E4007F;
-  --accent-wash: #FBE4EF;
-  --on-accent:   #FFFFFF;
+  --accent:      #FF4D9D;
+  --accent-fill: #FF2E8E;
+  --accent-wash: #2A1220;
+  --on-accent:   #16171A;
 
-  --focus: #0090D4;
+  --focus: #4FC3F7;
 
   /* --- шрифты --- */
   --display: "Playfair Display", "Times New Roman", Georgia, serif;
@@ -67,26 +67,25 @@
   --s12: 6rem;
 
   --ease: cubic-bezier(.22,.61,.36,1);
-  color-scheme: light;
+  color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper:     #131417;
-    --paper-2:   #1A1C20;
-    --paper-3:   #23262B;
-    --ink:       #EFEEEA;
-    --ink-2:     #C4C6CA;
-    --ink-soft:  #8F949C;
-    --rule:      #2F333A;
-    --rule-soft: #23262B;
-    --accent:      #FF4D9D;
-    --accent-fill: #FF2E8E;
-    --accent-wash: #2A1220;
-    --on-accent:   #16171A;
-    --focus: #4FC3F7;
-    color-scheme: dark;
-  }
+
+:root[data-theme="light"] {
+  --paper:     #F2F1ED;
+  --paper-2:   #E9E8E3;
+  --paper-3:   #DFDED8;
+  --ink:       #16171A;
+  --ink-2:     #3B3E44;
+  --ink-soft:  #6B7079;
+  --rule:      #CFCEC7;
+  --rule-soft: #E0DFD9;
+  --accent:      #C1005F;
+  --accent-fill: #E4007F;
+  --accent-wash: #FBE4EF;
+  --on-accent:   #FFFFFF;
+  --focus: #0090D4;
+  color-scheme: light;
 }
 
 :root[data-theme="dark"] {
@@ -301,13 +300,10 @@ section[id] { scroll-margin-top: 84px; }
 }
 .iconbtn:hover { border-color: var(--ink); color: var(--ink); }
 .iconbtn svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.i-moon { display: none; }
-:root[data-theme="dark"] .i-sun { display: none; }
-:root[data-theme="dark"] .i-moon { display: block; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .i-sun { display: none; }
-  :root:not([data-theme="light"]) .i-moon { display: block; }
-}
+.i-sun { display: none; }
+.i-moon { display: block; }
+:root[data-theme="light"] .i-sun { display: block; }
+:root[data-theme="light"] .i-moon { display: none; }
 .burger { display: none; }
 
 @media (max-width: 900px) {
@@ -2095,9 +2091,8 @@ a.crow:hover .crow__v { color: var(--accent); }
   var btn = document.getElementById("theme");
   if (btn) {
     btn.addEventListener("click", function () {
-      var isDark = root.getAttribute("data-theme") === "dark" ||
-        (!root.hasAttribute("data-theme") &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches);
+      /* тёмная — тема по умолчанию, поэтому светлая только по явному выбору */
+      var isDark = root.getAttribute("data-theme") !== "light";
       var next = isDark ? "light" : "dark";
       root.setAttribute("data-theme", next);
       try { localStorage.setItem("em-theme", next); } catch (e) {}
