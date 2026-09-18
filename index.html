@@ -418,8 +418,16 @@ section[id] { scroll-margin-top: 84px; }
 .caps { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
 @media (min-width: 560px) { .caps { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1020px) { .caps { grid-template-columns: repeat(4, 1fr); } }
-.cap { background: var(--paper); padding: var(--s3); }
+.cap { background: var(--paper); padding: var(--s3); display: flex; flex-direction: column; }
 .section--tint .cap { background: var(--paper-2); }
+/* превью прижато к низу: у карточек разная длина текста, иначе картинки
+   встали бы лесенкой */
+.cap img {
+  margin-top: auto; width: 100%; height: auto;
+  aspect-ratio: 4 / 3; object-fit: cover;
+  background: var(--paper-3);
+}
+.cap p { margin-bottom: var(--s3); }
 .cap svg { width: 22px; height: 22px; fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .cap h3 { font-family: var(--display); font-weight: 500; font-size: 1rem; margin-top: .8rem; }
 .cap p { margin-top: .4rem; font-size: .875rem; color: var(--ink-soft); }
@@ -888,43 +896,65 @@ a.crow:hover .crow__v { color: var(--accent); }
         <svg><use href="#i-print"/></svg>
         <h3>Полиграфия и prepress</h3>
         <p>Визитки, буклеты, каталоги, календари, плакаты, многостраничная вёрстка. Вылеты, кривые, профили, подпись в печать.</p>
+        <img src="https://images.unsplash.com/photo-1503694978374-8a2fa686963a?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Печатная машина в работе" width="640" height="480"
+             loading="lazy" decoding="async" />
       </div>
       <div class="cap">
         <svg><use href="#i-box"/></svg>
         <h3>Упаковка и этикетка</h3>
         <p>Развёртки, коробки, зип-пакеты, стикеры, маркировка и штрихкодирование. Учёт материала и способа печати.</p>
+        <img src="https://images.unsplash.com/photo-1573376670774-4427757f7963?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Белая картонная коробка" width="640" height="480"
+             loading="lazy" decoding="async" />
       </div>
       <div class="cap">
         <svg><use href="#i-grid"/></svg>
         <h3>Карточки для маркетплейсов</h3>
         <p>Инфографика для Ozon и Wildberries: главное фото, УТП, размерные схемы, лайфстайл-сцены, единый шаблон линейки.</p>
+        <img src="https://images.unsplash.com/photo-1605902711622-cfb43c4437b5?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Покупки в смартфоне" width="640" height="480"
+             loading="lazy" decoding="async" />
       </div>
       <div class="cap">
         <svg><use href="#i-camera"/></svg>
         <h3>Фотосъёмка и ретушь</h3>
         <p>Предметная и портретная съёмка, отбор кадров, цветокоррекция, глубокая ретушь, подготовка под печать и веб.</p>
+        <img src="https://images.unsplash.com/photo-1545242640-7c9e9cc07d23?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Камера и студийный свет" width="640" height="480"
+             loading="lazy" decoding="async" />
       </div>
       <div class="cap">
         <svg><use href="#i-pen"/></svg>
         <h3>Иллюстрация и рисунок</h3>
         <p>Векторная и растровая иллюстрация, работа на графическом планшете, иконки, паттерны, схемы и пиктограммы.</p>
+        <img src="https://images.unsplash.com/photo-1599252441131-5aafffcf7740?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Рисование на графическом планшете" width="640" height="480"
+             loading="lazy" decoding="async" />
       </div>
       <div class="cap">
         <svg><use href="#i-play"/></svg>
         <h3>Видео и ИИ-контент</h3>
         <p>Монтаж роликов в Premiere Pro, короткие видео для соцсетей, ИИ-фотосессии и генеративные визуалы под задачу бренда.</p>
+        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Таймлайн видеомонтажа" width="640" height="480"
+             loading="lazy" decoding="async" />
       </div>
       <div class="cap">
         <svg><use href="#i-deck"/></svg>
         <h3>Презентации и инфографика</h3>
         <p>Сборка и вёрстка презентаций, диаграммы, таблицы и схемы, оформление сторис, тексты и статьи для соцсетей.</p>
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Диаграммы на экране" width="640" height="480"
+             loading="lazy" decoding="async" />
       </div>
       <div class="cap">
         <svg><use href="#i-home"/></svg>
         <h3>Интерьер и 3D</h3>
         <p>Дизайн интерьера и трёхмерные сцены с прогулкой по ним, визуализации стендов и торгового оборудования, предметное 3D в SketchUp и 3ds Max.</p>
+        <img src="https://images.unsplash.com/photo-1678762200388-51e11225d4de?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Трёхмерная визуализация интерьера" width="640" height="480"
+             loading="lazy" decoding="async" />
       </div>
     </div>
+
+    <p class="note" style="margin-top:var(--s3)">
+      Фотографии к направлениям — Unsplash: Bank Phrom, Kelli McClintock,
+      CardMapr.nl, Randy Fath, Kelly Sikkema, Peter Stumpf, Luke Chesser,
+      Lumbardh Plluzhina.
+    </p>
 
     <div class="blockhead" style="margin-top:var(--s8)">
       <h3>Что именно вы получаете на выходе</h3>
