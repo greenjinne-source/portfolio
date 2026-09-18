@@ -349,6 +349,25 @@ section[id] { scroll-margin-top: 84px; }
 .crop::before { top: -7px; left: -7px; border-top-width: 1px; border-left-width: 1px; }
 .crop::after  { bottom: -7px; right: -7px; border-bottom-width: 1px; border-right-width: 1px; }
 
+/* ---------- плашки инструментов ---------- */
+.soft { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: var(--s3); }
+.soft li {
+  width: 62px; height: 62px; flex: none;
+  display: grid; place-items: center;
+  border: 1px solid var(--rule);
+  font-family: var(--body); font-weight: 400; font-size: 1.3rem;
+  letter-spacing: .01em; color: var(--ink-2);
+  transition: border-color .2s var(--ease), color .2s var(--ease);
+}
+/* трёхбуквенные сокращения иначе упираются в рамку */
+.soft li.is-wide { font-size: 1.05rem; }
+.soft li:hover { border-color: var(--ink); color: var(--ink); }
+/* название инструмента читает скринридер, на экране остаётся сокращение */
+.vh {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
 /* ---------- полоса цифр ---------- */
 .stats {
   display: grid; grid-template-columns: repeat(2, 1fr);
@@ -604,6 +623,18 @@ a.crow:hover .crow__v { color: var(--accent); }
         <div class="stat__l">Инструментов и компетенций в резюме</div>
       </div>
     </div>
+
+    <ul class="soft" aria-label="Инструменты">
+        <li title="Adobe Photoshop"><span aria-hidden="true">Ps</span><span class="vh">Adobe Photoshop</span></li>
+        <li title="Adobe Illustrator"><span aria-hidden="true">Ai</span><span class="vh">Adobe Illustrator</span></li>
+        <li title="Adobe InDesign"><span aria-hidden="true">Id</span><span class="vh">Adobe InDesign</span></li>
+        <li title="Adobe Premiere Pro"><span aria-hidden="true">Pr</span><span class="vh">Adobe Premiere Pro</span></li>
+        <li title="Adobe Acrobat"><span aria-hidden="true">Ac</span><span class="vh">Adobe Acrobat</span></li>
+        <li class="is-wide" title="CorelDRAW"><span aria-hidden="true">Cdr</span><span class="vh">CorelDRAW</span></li>
+        <li class="is-wide" title="Figma"><span aria-hidden="true">Fig</span><span class="vh">Figma</span></li>
+        <li title="SketchUp"><span aria-hidden="true">Su</span><span class="vh">SketchUp</span></li>
+        <li class="is-wide" title="3ds Max"><span aria-hidden="true">3ds</span><span class="vh">3ds Max</span></li>
+    </ul>
   </div>
 </section>
 
