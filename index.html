@@ -7,20 +7,7 @@
 <meta name="description" content="Портфолио графического дизайнера Евгения Мелёхина: упаковка и этикетка, полиграфия, карточки для маркетплейсов, съёмка и ретушь, презентации." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@400..700&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:wght@400..900&display=swap" rel="stylesheet" />
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112751635', 'ym');
-
-    ym(112751635, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/112751635" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400..800&family=JetBrains+Mono:wght@400;500;700&family=Unbounded:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
 <style>
@@ -31,15 +18,15 @@
    ============================================================ */
 
 :root {
-  /* --- бумага и краска (тёмная тема — основная) --- */
-  --paper:      #131417;
-  --paper-2:    #1A1C20;
-  --paper-3:    #23262B;
-  --ink:        #EFEEEA;
-  --ink-2:      #C4C6CA;
-  --ink-soft:   #8F949C;
-  --rule:       #2F333A;
-  --rule-soft:  #23262B;
+  /* --- бумага и краска (светлая тема — основная) --- */
+  --paper:      #F2F1ED;
+  --paper-2:    #E9E8E3;
+  --paper-3:    #DFDED8;
+  --ink:        #16171A;
+  --ink-2:      #3B3E44;
+  --ink-soft:   #6B7079;
+  --rule:       #CFCEC7;
+  --rule-soft:  #E0DFD9;
 
   /* --- триадные краски --- */
   --c: #0090D4;
@@ -48,17 +35,17 @@
   --k: #16171A;
 
   /* --- акцент: рубин (тёмная магента, читаемая как текст) --- */
-  --accent:      #FF4D9D;
-  --accent-fill: #FF2E8E;
-  --accent-wash: #2A1220;
-  --on-accent:   #16171A;
+  --accent:      #C1005F;
+  --accent-fill: #E4007F;
+  --accent-wash: #FBE4EF;
+  --on-accent:   #FFFFFF;
 
-  --focus: #4FC3F7;
+  --focus: #0090D4;
 
   /* --- шрифты --- */
-  --display: "Playfair Display", "Times New Roman", Georgia, serif;
-  --body:    "Commissioner", system-ui, -apple-system, sans-serif;
-  --mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --display: "Unbounded", "Golos Text", system-ui, sans-serif;
+  --body:    "Golos Text", system-ui, -apple-system, sans-serif;
+  --mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
   /* --- ритм --- */
   --gut: clamp(1rem, 4vw, 3rem);
@@ -67,25 +54,26 @@
   --s12: 6rem;
 
   --ease: cubic-bezier(.22,.61,.36,1);
-  color-scheme: dark;
+  color-scheme: light;
 }
 
-
-:root[data-theme="light"] {
-  --paper:     #F2F1ED;
-  --paper-2:   #E9E8E3;
-  --paper-3:   #DFDED8;
-  --ink:       #16171A;
-  --ink-2:     #3B3E44;
-  --ink-soft:  #6B7079;
-  --rule:      #CFCEC7;
-  --rule-soft: #E0DFD9;
-  --accent:      #C1005F;
-  --accent-fill: #E4007F;
-  --accent-wash: #FBE4EF;
-  --on-accent:   #FFFFFF;
-  --focus: #0090D4;
-  color-scheme: light;
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:     #131417;
+    --paper-2:   #1A1C20;
+    --paper-3:   #23262B;
+    --ink:       #EFEEEA;
+    --ink-2:     #C4C6CA;
+    --ink-soft:  #8F949C;
+    --rule:      #2F333A;
+    --rule-soft: #23262B;
+    --accent:      #FF4D9D;
+    --accent-fill: #FF2E8E;
+    --accent-wash: #2A1220;
+    --on-accent:   #16171A;
+    --focus: #4FC3F7;
+    color-scheme: dark;
+  }
 }
 
 :root[data-theme="dark"] {
@@ -117,8 +105,6 @@ body {
   line-height: 1.62;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  /* у Playfair цифры по умолчанию минускульные: «30» читается как «зо» */
-  font-variant-numeric: lining-nums;
 }
 img { display: block; max-width: 100%; }
 /* без этого скрытые оверлеи показываются поверх страницы на обычном хостинге */
@@ -126,7 +112,7 @@ img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 p { margin: 0; }
-h1, h2, h3, h4 { margin: 0; line-height: 1.14; font-weight: 600; text-wrap: balance; }
+h1, h2, h3, h4 { margin: 0; line-height: 1.08; font-weight: 600; text-wrap: balance; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 input, textarea { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
@@ -223,24 +209,24 @@ section[id] { scroll-margin-top: 84px; }
 /* ---------- типографика ---------- */
 .h-hero {
   font-family: var(--display);
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(2.1rem, 6.4vw, 4.6rem);
-  letter-spacing: -.005em;
-  line-height: 1.06;
+  letter-spacing: -.02em;
+  line-height: 1.02;
 }
 .h-hero em { font-style: normal; font-weight: 600; color: var(--accent); }
 .h-sec {
   font-family: var(--display);
   font-weight: 500;
   font-size: clamp(1.6rem, 3.4vw, 2.6rem);
-  letter-spacing: 0;
+  letter-spacing: -.02em;
   max-width: 22ch;
 }
 .h-card {
   font-family: var(--display);
   font-weight: 500;
   font-size: 1.0625rem;
-  letter-spacing: 0;
+  letter-spacing: -.01em;
 }
 .lede { font-size: clamp(1rem, 1.6vw, 1.15rem); color: var(--ink-2); max-width: 62ch; }
 .prose { color: var(--ink-2); max-width: 64ch; }
@@ -279,19 +265,11 @@ section[id] { scroll-margin-top: 84px; }
 .mark__name { font-family: var(--display); font-weight: 400; font-size: .95rem; letter-spacing: .02em; }
 .nav ul { display: flex; gap: .15rem; }
 .nav a {
-  position: relative;
   display: block; padding: .5rem .8rem;
   font-size: .875rem; font-weight: 500; color: var(--ink-2);
   transition: color .2s var(--ease), background .2s var(--ease);
 }
 .nav a:hover { color: var(--ink); background: var(--paper-3); }
-/* раздел, в котором читатель находится сейчас */
-.nav a[aria-current] { color: var(--ink); }
-.nav a[aria-current]::after {
-  content: ""; position: absolute;
-  left: .8rem; right: .8rem; bottom: .3rem; height: 2px;
-  background: var(--accent);
-}
 .hdr__act { display: flex; align-items: center; gap: .4rem; }
 .iconbtn {
   width: 40px; height: 40px; display: grid; place-items: center;
@@ -300,10 +278,13 @@ section[id] { scroll-margin-top: 84px; }
 }
 .iconbtn:hover { border-color: var(--ink); color: var(--ink); }
 .iconbtn svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.i-sun { display: none; }
-.i-moon { display: block; }
-:root[data-theme="light"] .i-sun { display: block; }
-:root[data-theme="light"] .i-moon { display: none; }
+.i-moon { display: none; }
+:root[data-theme="dark"] .i-sun { display: none; }
+:root[data-theme="dark"] .i-moon { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .i-sun { display: none; }
+  :root:not([data-theme="light"]) .i-moon { display: block; }
+}
 .burger { display: none; }
 
 @media (max-width: 900px) {
@@ -318,10 +299,6 @@ section[id] { scroll-margin-top: 84px; }
   .nav ul { flex-direction: column; gap: 0; }
   .nav a { padding: .85rem 0; font-family: var(--display); font-size: 1.25rem; font-weight: 400; border-bottom: 1px solid var(--rule-soft); }
   .nav a:hover { background: none; }
-  /* в выдвижном меню подчёркивание заменяет цвет: полоска потерялась бы
-     среди разделительных линий списка */
-  .nav a[aria-current] { color: var(--accent); border-bottom-color: var(--accent); }
-  .nav a[aria-current]::after { display: none; }
 }
 
 /* ---------- герой ---------- */
@@ -345,25 +322,6 @@ section[id] { scroll-margin-top: 84px; }
 .crop::before { top: -7px; left: -7px; border-top-width: 1px; border-left-width: 1px; }
 .crop::after  { bottom: -7px; right: -7px; border-bottom-width: 1px; border-right-width: 1px; }
 
-/* ---------- плашки инструментов ---------- */
-.soft { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: var(--s3); }
-.soft li {
-  width: 62px; height: 62px; flex: none;
-  display: grid; place-items: center;
-  border: 1px solid var(--rule);
-  font-family: var(--body); font-weight: 400; font-size: 1.3rem;
-  letter-spacing: .01em; color: var(--ink-2);
-  transition: border-color .2s var(--ease), color .2s var(--ease);
-}
-/* трёхбуквенные сокращения иначе упираются в рамку */
-.soft li.is-wide { font-size: 1.05rem; }
-.soft li:hover { border-color: var(--ink); color: var(--ink); }
-/* название инструмента читает скринридер, на экране остаётся сокращение */
-.vh {
-  position: absolute; width: 1px; height: 1px; overflow: hidden;
-  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
-}
-
 /* ---------- полоса цифр ---------- */
 .stats {
   display: grid; grid-template-columns: repeat(2, 1fr);
@@ -374,7 +332,7 @@ section[id] { scroll-margin-top: 84px; }
 .stat__n {
   font-family: var(--display); font-weight: 600;
   font-size: clamp(1.75rem, 4.4vw, 2.6rem); line-height: 1;
-  letter-spacing: -.01em; font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: -.03em; font-variant-numeric: tabular-nums;
 }
 .stat__n small { font-size: .45em; font-weight: 400; color: var(--ink-soft); letter-spacing: 0; margin-left: .25em; }
 .stat__l { margin-top: .6rem; font-size: .8125rem; color: var(--ink-soft); line-height: 1.4; }
@@ -400,6 +358,23 @@ section[id] { scroll-margin-top: 84px; }
 .lvl__bar i.on { background: var(--accent-fill); }
 .lvl:hover .lvl__bar i.on { background: var(--accent); }
 
+/* ---------- карьерная шкала ---------- */
+.gantt { display: grid; gap: var(--s2); }
+.gantt__axis {
+  position: relative; height: 22px; border-bottom: 1px solid var(--rule);
+  font-family: var(--mono); font-size: .6875rem; color: var(--ink-soft);
+}
+.gantt__axis b { position: absolute; bottom: 4px; transform: translateX(-50%); font-weight: 400; }
+.gantt__axis b::after { content: ""; position: absolute; left: 50%; bottom: -5px; width: 1px; height: 4px; background: var(--rule); }
+.gjob { display: grid; grid-template-columns: 1fr; gap: .35rem; }
+.gjob__top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .3rem 1rem; align-items: baseline; }
+.gjob__name { font-weight: 600; font-size: .9375rem; }
+.gjob__when { font-family: var(--mono); font-size: .75rem; color: var(--ink-soft); }
+.gjob__track { position: relative; height: 12px; background: var(--rule-soft); }
+.gjob__fill { position: absolute; top: 0; bottom: 0; background: var(--accent-fill); }
+.gjob:hover .gjob__fill { background: var(--accent); }
+.gjob__role { font-size: .875rem; color: var(--ink-soft); }
+
 /* ---------- вехи обучения ---------- */
 .miles { display: grid; gap: 0; border-top: 1px solid var(--rule); }
 .mile {
@@ -414,16 +389,8 @@ section[id] { scroll-margin-top: 84px; }
 .caps { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
 @media (min-width: 560px) { .caps { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1020px) { .caps { grid-template-columns: repeat(4, 1fr); } }
-.cap { background: var(--paper); padding: var(--s3); display: flex; flex-direction: column; }
+.cap { background: var(--paper); padding: var(--s3); }
 .section--tint .cap { background: var(--paper-2); }
-/* превью прижато к низу: у карточек разная длина текста, иначе картинки
-   встали бы лесенкой */
-.cap img {
-  margin-top: auto; width: 100%; height: auto;
-  aspect-ratio: 4 / 3; object-fit: cover;
-  background: var(--paper-3);
-}
-.cap p { margin-bottom: var(--s3); }
 .cap svg { width: 22px; height: 22px; fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .cap h3 { font-family: var(--display); font-weight: 500; font-size: 1rem; margin-top: .8rem; }
 .cap p { margin-top: .4rem; font-size: .875rem; color: var(--ink-soft); }
@@ -501,7 +468,7 @@ table.fmt td.f { font-family: var(--mono); font-size: .78rem; color: var(--ink-s
 }
 a.crow:hover { padding-left: .5rem; }
 .crow__k { font-family: var(--mono); font-size: .6875rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
-.crow__v { font-family: var(--display); font-weight: 400; font-size: clamp(1rem, 2.2vw, 1.3rem); letter-spacing: 0; word-break: break-word; }
+.crow__v { font-family: var(--display); font-weight: 400; font-size: clamp(1rem, 2.2vw, 1.3rem); letter-spacing: -.01em; word-break: break-word; }
 a.crow:hover .crow__v { color: var(--accent); }
 
 /* ---------- подвал ---------- */
@@ -587,7 +554,7 @@ a.crow:hover .crow__v { color: var(--accent); }
         <p class="slug rise">Графический дизайнер · Волгоград · удалённо</p>
         <h1 class="h-hero rise">Один дизайнер<br />на <em>весь визуал</em> бренда</h1>
         <p class="lede rise">
-          27 лет в графическом дизайне. Упаковка и этикетка, полиграфия
+          14 лет 6 месяцев в графическом дизайне. Упаковка и этикетка, полиграфия
           и наружная реклама, карточки для маркетплейсов, съёмка и ретушь, видео,
           презентации, интерьеры и 3D. Каждое направление довожу до файла,
           с которым можно идти в производство.
@@ -611,7 +578,7 @@ a.crow:hover .crow__v { color: var(--accent); }
 
     <div class="stats">
       <div class="stat">
-        <div class="stat__n">27 <small>лет</small></div>
+        <div class="stat__n">14,5 <small>лет</small></div>
         <div class="stat__l">Общий стаж в графическом дизайне</div>
       </div>
       <div class="stat">
@@ -619,30 +586,28 @@ a.crow:hover .crow__v { color: var(--accent); }
         <div class="stat__l">Первый профильный курс — Photoshop и CorelDRAW</div>
       </div>
       <div class="stat">
-        <div class="stat__n">300<small>+</small></div>
-        <div class="stat__l">Брендов, с которыми работал</div>
+        <div class="stat__n">2<small>г 3 мес</small></div>
+        <div class="stat__l">В штате ATEMI — федеральный спортивный бренд</div>
       </div>
       <div class="stat">
         <div class="stat__n">30<small>+</small></div>
         <div class="stat__l">Инструментов и компетенций в резюме</div>
       </div>
     </div>
-
-    <ul class="soft" aria-label="Инструменты">
-        <li title="Adobe Photoshop"><span aria-hidden="true">Ps</span><span class="vh">Adobe Photoshop</span></li>
-        <li title="Adobe Illustrator"><span aria-hidden="true">Ai</span><span class="vh">Adobe Illustrator</span></li>
-        <li title="Adobe InDesign"><span aria-hidden="true">Id</span><span class="vh">Adobe InDesign</span></li>
-        <li title="Adobe Premiere Pro"><span aria-hidden="true">Pr</span><span class="vh">Adobe Premiere Pro</span></li>
-        <li title="Adobe Acrobat"><span aria-hidden="true">Ac</span><span class="vh">Adobe Acrobat</span></li>
-        <li class="is-wide" title="CorelDRAW"><span aria-hidden="true">Cdr</span><span class="vh">CorelDRAW</span></li>
-        <li class="is-wide" title="Figma"><span aria-hidden="true">Fig</span><span class="vh">Figma</span></li>
-        <li title="SketchUp"><span aria-hidden="true">Su</span><span class="vh">SketchUp</span></li>
-        <li class="is-wide" title="3ds Max"><span aria-hidden="true">3ds</span><span class="vh">3ds Max</span></li>
-    </ul>
   </div>
 </section>
 
 <style>
+/* доп. правила для карьерной шкалы */
+.gantt__years { display: flex; margin-bottom: .4rem; }
+.gantt__years b {
+  flex: 1; text-align: center; font-weight: 400;
+  font-family: var(--mono); font-size: .6875rem; letter-spacing: .06em; color: var(--ink-soft);
+}
+.gjob__track {
+  background-color: var(--rule-soft);
+  background-image: repeating-linear-gradient(to right, var(--rule) 0 1px, transparent 1px 25%);
+}
 .lvl-legend {
   display: flex; flex-wrap: wrap; gap: .3rem 1.1rem; margin-top: var(--s3);
   font-family: var(--mono); font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft);
@@ -651,24 +616,8 @@ a.crow:hover .crow__v { color: var(--accent); }
 .lvl-legend i.off { background: var(--rule); }
 .two { display: grid; gap: var(--s6); }
 @media (min-width: 860px) { .two { grid-template-columns: 1fr 1fr; gap: var(--s8); } }
-/* ---------- фриланс по направлениям ---------- */
-.freel { border-top: 1px solid var(--rule); }
-.freel__row {
-  display: grid; gap: .35rem var(--s3);
-  padding-block: var(--s2); border-bottom: 1px solid var(--rule-soft);
-}
-.freel__row { grid-template-columns: 2.5rem 1fr; }
-.freel__n { grid-row: span 2; }
-.freel__n { font-family: var(--mono); font-size: .75rem; font-weight: 500; letter-spacing: .05em; color: var(--accent); }
-.freel__t { font-weight: 600; font-size: .9375rem; }
-.freel__t span {
-  display: block; margin-top: .15rem;
-  font-family: var(--mono); font-size: .6875rem; font-weight: 400;
-  letter-spacing: .05em; text-transform: uppercase; color: var(--ink-soft);
-}
-.freel__d { font-size: .875rem; line-height: 1.6; color: var(--ink-2); max-width: 62ch; }
 .blockhead { margin-bottom: var(--s3); }
-.blockhead h3 { font-family: var(--display); font-weight: 500; font-size: 1.15rem; letter-spacing: 0; }
+.blockhead h3 { font-family: var(--display); font-weight: 500; font-size: 1.15rem; letter-spacing: -.01em; }
 .blockhead p { margin-top: .35rem; font-size: .875rem; color: var(--ink-soft); max-width: 48ch; }
 </style>
 
@@ -694,7 +643,7 @@ a.crow:hover .crow__v { color: var(--accent); }
       <div>
         <h2 class="h-sec">От визитки до прогулки по интерактивному интерьеру</h2>
         <p class="prose" style="margin-top:var(--s3)">
-          Меня зовут Евгений Мелёхин. Двадцать семь лет занимаюсь графическим
+          Меня зовут Евгений Мелёхин. Больше четырнадцати лет занимаюсь графическим
           дизайном — и всё это время работаю не «до красивой картинки», а до результата,
           который ушёл в печать, встал на полку, вышел на маркетплейс или открылся
           сценой, по которой можно пройтись.
@@ -727,7 +676,7 @@ a.crow:hover .crow__v { color: var(--accent); }
   <div class="wrap">
     <p class="slug">Экспертиза в цифрах</p>
     <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span></span></div>
-    <h2 class="h-sec">Что стоит за этим опытом</h2>
+    <h2 class="h-sec">Что стоит за четырнадцатью годами</h2>
 
     <div class="two" style="margin-top:var(--s6)">
 
@@ -797,6 +746,52 @@ a.crow:hover .crow__v { color: var(--accent); }
           <span><i></i><i></i><i></i>Продвинутый</span>
           <span><i></i><i></i><i></i><i></i>Экспертный</span>
         </p>
+      </div>
+
+      <!-- карьера и обучение -->
+      <div>
+        <div class="blockhead">
+          <h3>Места работы по трудовой книжке</h3>
+          <p>Длина полосы соответствует фактической продолжительности работы. Шкала — с января 2020 по декабрь 2023.</p>
+        </div>
+
+        <div class="gantt">
+          <div class="gantt__years" aria-hidden="true">
+            <b>2020</b><b>2021</b><b>2022</b><b>2023</b>
+          </div>
+
+          <div class="gjob">
+            <div class="gjob__top">
+              <span class="gjob__name">ООО «РСП» — бренд ATEMI</span>
+              <span class="gjob__when">08.2020 — 10.2022 · 27 мес</span>
+            </div>
+            <div class="gjob__track"><span class="gjob__fill" style="left:14.58%;width:56.25%"></span></div>
+            <div class="gjob__role">Графический дизайнер · спортивный инвентарь и экипировка</div>
+          </div>
+
+          <div class="gjob">
+            <div class="gjob__top">
+              <span class="gjob__name">ООО «НОВА-УФ»</span>
+              <span class="gjob__when">06.2023 — 07.2023 · 2 мес</span>
+            </div>
+            <div class="gjob__track"><span class="gjob__fill" style="left:85.42%;width:4.17%"></span></div>
+            <div class="gjob__role">Дизайнер · УФ-печать по хризотилцементным панелям</div>
+          </div>
+
+          <div class="gjob">
+            <div class="gjob__top">
+              <span class="gjob__name">ООО «НОВА-ФАСАД»</span>
+              <span class="gjob__when">08.2023 — 10.2023 · 3 мес</span>
+            </div>
+            <div class="gjob__track"><span class="gjob__fill" style="left:89.58%;width:6.25%"></span></div>
+            <div class="gjob__role">Дизайнер · полиграфия, каталоги, стенды, редизайн сайта</div>
+          </div>
+        </div>
+
+        <p class="note" style="margin-top:var(--s3)">
+          Общий стаж — 14 лет 6 месяцев. На шкале показан последний период;
+          более ранний опыт в трудовой книжке распределён до 2020 года.
+        </p>
 
         <div class="blockhead" style="margin-top:var(--s6)">
           <h3>Профильное обучение</h3>
@@ -821,58 +816,8 @@ a.crow:hover .crow__v { color: var(--accent); }
             <span class="mile__t">Профессия «Графический дизайнер» <span>Программа профессиональной подготовки</span></span>
           </div>
         </div>
-
-      </div>
-
-      <!-- фриланс -->
-      <div>
-      <div class="blockhead">
-        <h3>27 лет в дизайне</h3>
-        <p>14,5 по трудовой и 16 лет фриланса — годы частично идут
-          параллельно. Ниже — по направлениям, из чего складывается фриланс.</p>
-      </div>
-
-      <div class="freel">
-        <div class="freel__row">
-          <div class="freel__n">01</div>
-          <div class="freel__t">Полиграфия и фирменный стиль<span>постоянный поток</span></div>
-          <p class="freel__d">Визитки, буклеты, каталоги, календари, плакаты. Логотип и минимальный набор стиля под задачу: знак, цвета, шрифты, шаблоны документов — чтобы заказчик дальше собирал типовые макеты сам.</p>
-        </div>
-        <div class="freel__row">
-          <div class="freel__n">02</div>
-          <div class="freel__t">Упаковка и этикетка<span>производственные клиенты</span></div>
-          <p class="freel__d">Развёртки под штанц-форму, коробки, зип-пакеты, стикеры, маркировка. Работа идёт до цветопробы и подписи в печать, а не до картинки на экране: материал и способ печати обсуждаются с типографией заранее.</p>
-        </div>
-        <div class="freel__row">
-          <div class="freel__n">03</div>
-          <div class="freel__t">Карточки для маркетплейсов<span>линейками, не поштучно</span></div>
-          <p class="freel__d">Инфографика для Ozon и Wildberries: главное фото, УТП, размерные схемы, лайфстайл. Обычно заказывают сразу линейкой — под неё собирается шаблон, чтобы новые позиции добавлялись без переделки.</p>
-        </div>
-        <div class="freel__row">
-          <div class="freel__n">04</div>
-          <div class="freel__t">Фотосъёмка и ретушь<span>свой кадр вместо стока</span></div>
-          <p class="freel__d">Предметная и портретная съёмка, отбор, цветокоррекция, глубокая ретушь. Один и тот же кадр готовится и под печать, и под веб, поэтому каталог и карточка на маркетплейсе не расходятся по цвету.</p>
-        </div>
-        <div class="freel__row">
-          <div class="freel__n">05</div>
-          <div class="freel__t">Иллюстрация и инфографика<span>там, где сток ломает стиль</span></div>
-          <p class="freel__d">Векторная и растровая графика, планшет: иконки, паттерны, схемы, пиктограммы, диаграммы. Сюда же — сборка презентаций и шаблон, по которому заказчик дальше верстает слайды сам.</p>
-        </div>
-        <div class="freel__row">
-          <div class="freel__n">06</div>
-          <div class="freel__t">Интерьер, 3D и ИИ-контент<span>направления последних лет</span></div>
-          <p class="freel__d">Планировки и трёхмерные сцены с прогулкой по ним, визуализации стендов и торгового оборудования. Рядом — монтаж коротких роликов, ИИ-фотосессии и генеративные визуалы под задачу бренда.</p>
-        </div>
-      </div>
-
-      <p class="note" style="margin-top:var(--s3)">
-        Направления перечислены по тому, как часто их заказывают, а не по дате
-        появления. Большинство проектов идёт сразу в нескольких: съёмка, макет
-        и сборка остаются в одних руках.
-      </p>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -892,65 +837,43 @@ a.crow:hover .crow__v { color: var(--accent); }
         <svg><use href="#i-print"/></svg>
         <h3>Полиграфия и prepress</h3>
         <p>Визитки, буклеты, каталоги, календари, плакаты, многостраничная вёрстка. Вылеты, кривые, профили, подпись в печать.</p>
-        <img src="https://images.unsplash.com/photo-1503694978374-8a2fa686963a?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Печатная машина в работе" width="640" height="480"
-             loading="lazy" decoding="async" />
       </div>
       <div class="cap">
         <svg><use href="#i-box"/></svg>
         <h3>Упаковка и этикетка</h3>
         <p>Развёртки, коробки, зип-пакеты, стикеры, маркировка и штрихкодирование. Учёт материала и способа печати.</p>
-        <img src="https://images.unsplash.com/photo-1573376670774-4427757f7963?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Белая картонная коробка" width="640" height="480"
-             loading="lazy" decoding="async" />
       </div>
       <div class="cap">
         <svg><use href="#i-grid"/></svg>
         <h3>Карточки для маркетплейсов</h3>
         <p>Инфографика для Ozon и Wildberries: главное фото, УТП, размерные схемы, лайфстайл-сцены, единый шаблон линейки.</p>
-        <img src="https://images.unsplash.com/photo-1605902711622-cfb43c4437b5?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Покупки в смартфоне" width="640" height="480"
-             loading="lazy" decoding="async" />
       </div>
       <div class="cap">
         <svg><use href="#i-camera"/></svg>
         <h3>Фотосъёмка и ретушь</h3>
         <p>Предметная и портретная съёмка, отбор кадров, цветокоррекция, глубокая ретушь, подготовка под печать и веб.</p>
-        <img src="https://images.unsplash.com/photo-1545242640-7c9e9cc07d23?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Камера и студийный свет" width="640" height="480"
-             loading="lazy" decoding="async" />
       </div>
       <div class="cap">
         <svg><use href="#i-pen"/></svg>
         <h3>Иллюстрация и рисунок</h3>
         <p>Векторная и растровая иллюстрация, работа на графическом планшете, иконки, паттерны, схемы и пиктограммы.</p>
-        <img src="https://images.unsplash.com/photo-1599252441131-5aafffcf7740?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Рисование на графическом планшете" width="640" height="480"
-             loading="lazy" decoding="async" />
       </div>
       <div class="cap">
         <svg><use href="#i-play"/></svg>
         <h3>Видео и ИИ-контент</h3>
         <p>Монтаж роликов в Premiere Pro, короткие видео для соцсетей, ИИ-фотосессии и генеративные визуалы под задачу бренда.</p>
-        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Таймлайн видеомонтажа" width="640" height="480"
-             loading="lazy" decoding="async" />
       </div>
       <div class="cap">
         <svg><use href="#i-deck"/></svg>
         <h3>Презентации и инфографика</h3>
         <p>Сборка и вёрстка презентаций, диаграммы, таблицы и схемы, оформление сторис, тексты и статьи для соцсетей.</p>
-        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Диаграммы на экране" width="640" height="480"
-             loading="lazy" decoding="async" />
       </div>
       <div class="cap">
         <svg><use href="#i-home"/></svg>
         <h3>Интерьер и 3D</h3>
         <p>Дизайн интерьера и трёхмерные сцены с прогулкой по ним, визуализации стендов и торгового оборудования, предметное 3D в SketchUp и 3ds Max.</p>
-        <img src="https://images.unsplash.com/photo-1678762200388-51e11225d4de?w=640&h=480&fit=crop&crop=entropy&q=72&fm=jpg" alt="Трёхмерная визуализация интерьера" width="640" height="480"
-             loading="lazy" decoding="async" />
       </div>
     </div>
-
-    <p class="note" style="margin-top:var(--s3)">
-      Фотографии к направлениям — Unsplash: Bank Phrom, Kelli McClintock,
-      CardMapr.nl, Randy Fath, Kelly Sikkema, Peter Stumpf, Luke Chesser,
-      Lumbardh Plluzhina.
-    </p>
 
     <div class="blockhead" style="margin-top:var(--s8)">
       <h3>Что именно вы получаете на выходе</h3>
@@ -1329,45 +1252,6 @@ a.crow:hover .crow__v { color: var(--accent); }
           <div class="prs__act">
             <button class="btn btn--ghost btn--sm" type="button" data-deck="forma">
               Смотреть <span class="prs__n">6 стр.</span>
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <article class="prs__card">
-        <img src="img/prs-forma-team.jpg" alt="Превью презентации «Игровая форма команды 26/27»" loading="lazy" />
-        <div class="prs__b">
-          <h3>Игровая форма команды 26/27</h3>
-          <p>Комплект клуба на сезон: домашняя и гостевая форма с номерами и фамилиями, ветрозащитная куртка, вратарский комплект, шрифт для номеров.</p>
-          <div class="prs__act">
-            <button class="btn btn--ghost btn--sm" type="button" data-deck="forma-team">
-              Смотреть <span class="prs__n">9 стр.</span>
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <article class="prs__card">
-        <img src="img/prs-forma-chekhov.jpg" alt="Превью презентации «Игровая форма ЧШЛ 2026»" loading="lazy" />
-        <div class="prs__b">
-          <h3>Игровая форма ЧШЛ 2026</h3>
-          <p>Полный комплект клуба: четыре варианта футболки, худи, поло, кепка, вратарское джерси и шрифт для номеров.</p>
-          <div class="prs__act">
-            <button class="btn btn--ghost btn--sm" type="button" data-deck="forma-chekhov">
-              Смотреть <span class="prs__n">11 стр.</span>
-            </button>
-          </div>
-        </div>
-      </article>
-
-      <article class="prs__card">
-        <img src="img/prs-forma-preview.jpg" alt="Превью презентации «Форма 2026 — четыре варианта»" loading="lazy" />
-        <div class="prs__b">
-          <h3>Форма 2026 — четыре варианта</h3>
-          <p>Четыре концепта игрового комплекта: джерси, шорты и гетры с раскладкой паттернов по каждому варианту.</p>
-          <div class="prs__act">
-            <button class="btn btn--ghost btn--sm" type="button" data-deck="forma-preview">
-              Смотреть <span class="prs__n">5 стр.</span>
             </button>
           </div>
         </div>
@@ -1970,9 +1854,6 @@ a.crow:hover .crow__v { color: var(--accent); }
     teqball: { title: "TeqBall", pages: 18, pdf: "pdf/teqball.pdf" },
     atemi:   { title: "ATEMI 2026", pages: 16, pdf: "pdf/atemi.pdf" },
     forma:   { title: "Форма концепты 2026", pages: 6, pdf: "pdf/atemi-forma-2026.pdf" },
-    "forma-team":    { title: "Игровая форма команды 26/27", pages: 9, pdf: "pdf/atemi-forma-team-2627.pdf" },
-    "forma-chekhov": { title: "Игровая форма ЧШЛ 2026", pages: 11, pdf: "pdf/atemi-forma-chekhov-2026.pdf" },
-    "forma-preview": { title: "Форма 2026 — четыре варианта", pages: 5, pdf: "pdf/atemi-forma-preview-2026.pdf" },
     sidwood: { title: "SidWood — инструкция по монтажу", pages: 27, pdf: "pdf/sidwood-instrukciya.pdf" },
     yolobox: { title: "Yolobox", pages: 15 },
     "cat-sport":  { title: "ATEMI — каталог спорттоваров 2023", pages: 29, pdf: "pdf/cat-sport.pdf" },
@@ -2091,8 +1972,9 @@ a.crow:hover .crow__v { color: var(--accent); }
   var btn = document.getElementById("theme");
   if (btn) {
     btn.addEventListener("click", function () {
-      /* тёмная — тема по умолчанию, поэтому светлая только по явному выбору */
-      var isDark = root.getAttribute("data-theme") !== "light";
+      var isDark = root.getAttribute("data-theme") === "dark" ||
+        (!root.hasAttribute("data-theme") &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches);
       var next = isDark ? "light" : "dark";
       root.setAttribute("data-theme", next);
       try { localStorage.setItem("em-theme", next); } catch (e) {}
@@ -2132,53 +2014,6 @@ a.crow:hover .crow__v { color: var(--accent); }
     target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
     try { history.replaceState(null, "", "#" + id); } catch (err) {}
   });
-
-  /* --- подсветка раздела, в котором читатель находится --- */
-  var spy = [];
-  if (nav) {
-    Array.prototype.forEach.call(nav.querySelectorAll('a[href^="#"]'), function (a) {
-      var sec = document.getElementById(a.getAttribute("href").slice(1));
-      if (sec) spy.push({ link: a, sec: sec });
-    });
-  }
-
-  if (spy.length) {
-    var hdr = document.querySelector(".hdr");
-    var current = null;
-    var queued = false;
-
-    function markSection() {
-      queued = false;
-      var line = (hdr ? hdr.getBoundingClientRect().height : 0) + 24;
-      var active = null;
-
-      /* У дна страницы последний раздел может так и не дойти до линии —
-         короткие «Контакты» иначе никогда бы не подсветились. */
-      var doc = document.documentElement;
-      if (window.innerHeight + window.pageYOffset >= doc.scrollHeight - 2) {
-        active = spy[spy.length - 1];
-      } else {
-        for (var i = 0; i < spy.length; i++) {
-          if (spy[i].sec.getBoundingClientRect().top <= line) active = spy[i];
-        }
-      }
-
-      if (active === current) return;
-      if (current) current.link.removeAttribute("aria-current");
-      if (active) active.link.setAttribute("aria-current", "true");
-      current = active;
-    }
-
-    function queueMark() {
-      if (queued) return;
-      queued = true;
-      window.requestAnimationFrame(markSection);
-    }
-
-    window.addEventListener("scroll", queueMark, { passive: true });
-    window.addEventListener("resize", queueMark);
-    markSection();
-  }
 
   /* --- год в подвале --- */
   var y = document.getElementById("year");
