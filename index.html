@@ -2466,12 +2466,26 @@ a.crow:hover .crow__v { color: var(--accent); }
         '<p>Нужен один раз для этого браузера. Создайте fine-grained token на github.com → Settings → Developer settings → Personal access tokens: доступ только к репозиторию <b>' + REPO + '</b>, право <b>Contents: Read and write</b>.</p>' +
         '<p>Ключ хранится только в этом браузере и уходит только на api.github.com.</p>' +
         '<input type="password" autocomplete="off" placeholder="github_pat_…" required />' +
+        '<p class="ed-err" hidden style="color:#b3261e;margin:10px 0 0"></p>' +
         '<div class="ed-row"><button type="button" class="ed-cancel">Отмена</button><button type="submit">Сохранить ключ</button></div></form>';
       document.body.appendChild(w);
       var inp = w.querySelector("input"); inp.focus();
       w.querySelector(".ed-cancel").onclick = function () { w.remove(); resolve(null); };
-      w.querySelector("form").onsubmit = function (e) { e.preventDefault(); var v = inp.value.trim(); w.remove(); if (v) lsSet(KEY, v); resolve(v || null); };
+      var err = w.querySelector(".ed-err");
+      w.querySelector("form").onsubmit = function (e) {
+        e.preventDefault();
+        var v = cleanToken(inp.value);
+        if (!v) { err.textContent = "Это не похоже на ключ GitHub: он начинается с github_pat_ (или ghp_) и состоит только из латинских букв, цифр и _. Скопируйте ключ ещё раз без лишнего текста."; err.hidden = false; inp.focus(); return; }
+        w.remove(); lsSet(KEY, v); resolve(v);
+      };
     });
+  }
+
+  /* убрать пробелы, переносы и невидимые символы; ключ — только латиница, цифры и _ */
+  function cleanToken(v) {
+    v = String(v || "").replace(/[\s\u200b-\u200f\u2028\u2029\u2060\ufeff]/g, "");
+    var m = v.match(/(github_pat_[A-Za-z0-9_]+|gh[pousr]_[A-Za-z0-9]+)/);
+    return m ? m[1] : null;
   }
 
   function b64decode(b64) {
@@ -2515,7 +2529,8 @@ a.crow:hover .crow__v { color: var(--accent); }
   function save() {
     var list = Array.prototype.slice.call(dirty());
     if (!list.length || busy) return;
-    var token = lsGet(KEY);
+    var token = cleanToken(lsGet(KEY));
+    if (!token) lsSet(KEY, null);
     var p = token ? Promise.resolve(token) : askToken();
     p.then(function (tok) {
       if (!tok) return;
