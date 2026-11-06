@@ -154,7 +154,11 @@ section[id] { scroll-margin-top: 84px; }
   display: flex; align-items: center; gap: 0;
   margin-block: calc(var(--s3) + .7rem) var(--s4);
 }
-.press-rule i { display: block; position: relative; width: 26px; height: 7px; flex: none; }
+.press-rule i { display: block; position: relative; width: 26px; height: 7px; flex: 0 1 26px; min-width: 12px; }
+/* перемычки-линии между группами a / ral / hex */
+.press-rule b { display: block; height: 1px; flex: 0 1 20px; min-width: 6px; background: var(--rule); }
+.press-rule b:first-of-type { margin-left: 3px; }
+.press-rule b.w { flex-basis: 33px; }
 /* подписи красок, как на контрольном клине печатного листа */
 .press-rule i::before {
   position: absolute; bottom: calc(100% + 3px); left: 0; right: 0;
@@ -175,7 +179,21 @@ section[id] { scroll-margin-top: 84px; }
 .press-rule i:nth-child(5) { background: #E9412B; }
 .press-rule i:nth-child(6) { background: #009B58; }
 .press-rule i:nth-child(7) { background: #2E3192; }
-.press-rule span { flex: 1; height: 1px; background: var(--rule); margin-left: 12px; }
+.press-rule i:nth-of-type(8)::before  { content: "a"; }
+.press-rule i:nth-of-type(9)::before  { content: "r"; }
+.press-rule i:nth-of-type(10)::before { content: "a"; }
+.press-rule i:nth-of-type(11)::before { content: "l"; }
+.press-rule i:nth-of-type(12)::before { content: "h"; }
+.press-rule i:nth-of-type(13)::before { content: "e"; }
+.press-rule i:nth-of-type(14)::before { content: "x"; }
+.press-rule i:nth-of-type(8)  { background: #FFFFFF; box-shadow: inset 0 0 0 1px var(--rule); }
+.press-rule i:nth-of-type(9)  { background: #156B78; }
+.press-rule i:nth-of-type(10) { background: #691578; }
+.press-rule i:nth-of-type(11) { background: #C85E10; }
+.press-rule i:nth-of-type(12) { background: #153178; }
+.press-rule i:nth-of-type(13) { background: #78154D; }
+.press-rule i:nth-of-type(14) { background: #C6C810; }
+.press-rule span { flex: 1; height: 1px; background: var(--rule); margin-left: 0; }
 
 /* ---------- рамка печатного листа с метками реза ---------- */
 .sheet {
@@ -311,8 +329,10 @@ section[id] { scroll-margin-top: 84px; }
   font-family: var(--mono); font-size: .75rem; letter-spacing: .06em;
   text-transform: uppercase; color: var(--ink-soft);
 }
-.hero__fig { position: relative; margin-top: var(--s4); }
+.hero__fig { position: relative; margin: var(--s4) 0 0; }
 .hero__fig img { width: 100%; height: auto; }
+.hero__media { min-width: 0; }
+.hero__fig--2 { margin-top: var(--s3); }
 /* приводочные метки по углам */
 .crop { position: relative; }
 .crop::before, .crop::after {
@@ -488,8 +508,9 @@ a.crow:hover .crow__v { color: var(--accent); }
   .media2 { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 900px) {
-  .hero__grid { grid-template-columns: 1.15fr .85fr; align-items: end; }
-  .hero__fig { margin-top: 0; }
+  .hero__grid { grid-template-columns: 1.15fr .85fr; align-items: start; }
+  .hero__media { margin-top: var(--hero-off, 2.6rem); }
+  .hero__media > .hero__fig:first-child { margin-top: 0; }
   .about { grid-template-columns: 320px 1fr; }
   .contact { grid-template-columns: 1fr 1fr; }
   .split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s8); align-items: start; }
@@ -553,9 +574,9 @@ a.crow:hover .crow__v { color: var(--accent); }
     <div class="hero__grid">
       <div class="hero__copy">
         <p class="slug rise">Графический дизайнер · Волгоград · удалённо</p>
-        <h1 class="h-hero rise">Один дизайнер<br />на <em>весь визуал</em> бренда</h1>
+        <h1 class="h-hero rise">Дизайнер<br />на <em>весь визуал</em> бренда</h1>
         <p class="lede rise">
-          14 лет 6 месяцев в графическом дизайне. Упаковка и этикетка, полиграфия
+          Упаковка и этикетка, полиграфия
           и наружная реклама, карточки для маркетплейсов, съёмка и ретушь, видео,
           презентации, интерьеры и 3D. Каждое направление довожу до файла,
           с которым можно идти в производство.
@@ -568,13 +589,18 @@ a.crow:hover .crow__v { color: var(--accent); }
           <span>ATEMI</span><span>МЕРА</span><span>Хлебный Спас</span><span>НОВА-ФАСАД</span><span>SidWood</span>
         </p>
       </div>
-      <figure class="hero__fig crop" style="margin:0">
-        <img src="img/hero.jpg" alt="Образцы бумаги, цветовые выкраски, тиснёная карточка и латунная линейка на бетонной поверхности" width="1584" height="672" />
-      </figure>
+      <div class="hero__media">
+        <figure class="hero__fig crop">
+          <img src="img/hero-pantone.jpg" alt="Веер цветовых выкрасок Pantone крупным планом" width="1600" height="1068" />
+        </figure>
+        <figure class="hero__fig hero__fig--2 crop">
+          <img src="img/hero.jpg" alt="Образцы бумаги, цветовые выкраски, тиснёная карточка и латунная линейка на бетонной поверхности" width="1584" height="672" loading="lazy" />
+        </figure>
+      </div>
     </div>
 
     <div class="press-rule" aria-hidden="true">
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><span></span>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b><i></i><b></b><i></i><i></i><i></i><b class="w"></b><i></i><i></i><i></i><span></span>
     </div>
 
     <div class="stats">
@@ -626,7 +652,7 @@ a.crow:hover .crow__v { color: var(--accent); }
 <section class="section" id="about">
   <div class="wrap">
     <p class="slug">Обо мне</p>
-    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span></span></div>
+    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b><i></i><b></b><i></i><i></i><i></i><b class="w"></b><i></i><i></i><i></i><span></span></div>
 
     <div class="about">
       <div>
@@ -676,8 +702,8 @@ a.crow:hover .crow__v { color: var(--accent); }
 <section class="section section--tint" id="expertise">
   <div class="wrap">
     <p class="slug">Экспертиза в цифрах</p>
-    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span></span></div>
-    <h2 class="h-sec">Что стоит за четырнадцатью годами</h2>
+    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b><i></i><b></b><i></i><i></i><i></i><b class="w"></b><i></i><i></i><i></i><span></span></div>
+    <h2 class="h-sec">Четверть века с Photoshop</h2>
 
     <div class="two" style="margin-top:var(--s6)">
 
@@ -752,49 +778,6 @@ a.crow:hover .crow__v { color: var(--accent); }
       <!-- карьера и обучение -->
       <div>
         <div class="blockhead">
-          <h3>Места работы по трудовой книжке</h3>
-          <p>Длина полосы соответствует фактической продолжительности работы. Шкала — с января 2020 по декабрь 2023.</p>
-        </div>
-
-        <div class="gantt">
-          <div class="gantt__years" aria-hidden="true">
-            <b>2020</b><b>2021</b><b>2022</b><b>2023</b>
-          </div>
-
-          <div class="gjob">
-            <div class="gjob__top">
-              <span class="gjob__name">ООО «РСП» — бренд ATEMI</span>
-              <span class="gjob__when">08.2020 — 10.2022 · 27 мес</span>
-            </div>
-            <div class="gjob__track"><span class="gjob__fill" style="left:14.58%;width:56.25%"></span></div>
-            <div class="gjob__role">Графический дизайнер · спортивный инвентарь и экипировка</div>
-          </div>
-
-          <div class="gjob">
-            <div class="gjob__top">
-              <span class="gjob__name">ООО «НОВА-УФ»</span>
-              <span class="gjob__when">06.2023 — 07.2023 · 2 мес</span>
-            </div>
-            <div class="gjob__track"><span class="gjob__fill" style="left:85.42%;width:4.17%"></span></div>
-            <div class="gjob__role">Дизайнер · УФ-печать по хризотилцементным панелям</div>
-          </div>
-
-          <div class="gjob">
-            <div class="gjob__top">
-              <span class="gjob__name">ООО «НОВА-ФАСАД»</span>
-              <span class="gjob__when">08.2023 — 10.2023 · 3 мес</span>
-            </div>
-            <div class="gjob__track"><span class="gjob__fill" style="left:89.58%;width:6.25%"></span></div>
-            <div class="gjob__role">Дизайнер · полиграфия, каталоги, стенды, редизайн сайта</div>
-          </div>
-        </div>
-
-        <p class="note" style="margin-top:var(--s3)">
-          Общий стаж — 14 лет 6 месяцев. На шкале показан последний период;
-          более ранний опыт в трудовой книжке распределён до 2020 года.
-        </p>
-
-        <div class="blockhead" style="margin-top:var(--s6)">
           <h3>Профильное обучение</h3>
           <p>Курсы идут в хронологическом порядке — от первых графических пакетов к трёхмерной графике.</p>
         </div>
@@ -826,7 +809,7 @@ a.crow:hover .crow__v { color: var(--accent); }
 <section class="section">
   <div class="wrap">
     <p class="slug">Направления работы</p>
-    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span></span></div>
+    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b><i></i><b></b><i></i><i></i><i></i><b class="w"></b><i></i><i></i><i></i><span></span></div>
     <h2 class="h-sec">Восемь направлений, которые закрываю сам</h2>
     <p class="lede" style="margin-top:var(--s2)">
       Макет, съёмка, обработка и сборка остаются в одних руках — значит, стиль
@@ -932,7 +915,7 @@ a.crow:hover .crow__v { color: var(--accent); }
 <section class="section section--tint" id="work">
   <div class="wrap">
     <p class="slug">Работы · полиграфия и упаковка</p>
-    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span></span></div>
+    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b><i></i><b></b><i></i><i></i><i></i><b class="w"></b><i></i><i></i><i></i><span></span></div>
     <h2 class="h-sec">Проекты, которые ушли в тираж</h2>
     <p class="lede" style="margin-top:var(--s2)">
       Упаковка, этикетка, техпакеты и торговая графика для спортивных, аграрных
@@ -1024,8 +1007,9 @@ a.crow:hover .crow__v { color: var(--accent); }
       <figure class="shot"><img src="img/mp/klesh-08.jpg" alt="Карточка маркетплейса, Клещебой БИО: Экономия" loading="lazy" /><figcaption><b>Экономия</b><em>карточка 08</em></figcaption></figure>
       <figure class="shot"><img src="img/mp/klesh-09.jpg" alt="Карточка маркетплейса, Клещебой БИО: Сертификат соответствия эко-продукции" loading="lazy" /><figcaption><b>Сертификат соответствия эко-продукции</b><em>карточка 09</em></figcaption></figure>
       <figure class="shot"><img src="img/mp/klesh-10.jpg" alt="Карточка маркетплейса, Клещебой БИО: Призыв к заказу" loading="lazy" /><figcaption><b>Призыв к заказу</b><em>карточка 10</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp/lw-11.jpg" alt="Карточка маркетплейса, одноразовые полотенца Lucky Woman: светлый вариант слайда преимуществ" loading="lazy" /><figcaption><b>Преимущества: светлый вариант</b><em>карточка 11</em></figcaption></figure>
     </div>
-    <button class="gal__more" type="button">Смотреть все 10 <span>карточек · ещё 5</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    <button class="gal__more" type="button">Смотреть все 11 <span>карточек · ещё 6</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
 
     <div class="blockhead" style="margin-top:var(--s8)">
       <h3>«Золотая Плата» — карточки инвестиционных монет</h3>
@@ -1070,6 +1054,203 @@ a.crow:hover .crow__v { color: var(--accent); }
       <figure class="shot shot--slide"><img src="img/mp/papa-print-black.jpg" data-full="img/mp/papa-print-black-full.jpg" alt="Макет печати 290 × 90 мм: чёрные контурные буквы «ПАПА», фото папы с малышом и подпись EST. 2026 — для светлой ткани" loading="lazy" /><figcaption><b>Чёрные буквы</b><em>файл печати, светлая ткань</em></figcaption></figure>
       <figure class="shot shot--slide"><img src="img/mp/papa-idea.jpg" data-full="img/mp/papa-idea-full.jpg" alt="Альтернативный принт «Папина команда»: номер, имена детей и год в стиле спортивной формы" loading="lazy" /><figcaption><b>«Папина команда»</b><em>альтернативная идея принта</em></figcaption></figure>
     </div>
+
+    <div class="blockhead" style="margin-top:var(--s8)">
+      <h3>Lucky Woman — одноразовые полотенца для лица</h3>
+      <p>Карточка товара из 10 слайдов и светлый вариант слайда преимуществ: обложки для пачки 60 шт. и набора 120 шт., инфографика свойств, крупные планы фактуры, сценарии использования и экспертный слайд. Единая система: мрамор с золотыми прожилками, как на упаковке, золотые плашки и синие подзаголовки.</p>
+    </div>
+
+    <p class="slug" style="margin-top:var(--s4)">Одноразовые полотенца из вискозы, 90 г/м² · 11 карточек</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp/lw-01.jpg" alt="Карточка маркетплейса, одноразовые полотенца Lucky Woman: Обложка: 60 шт." loading="lazy" /><figcaption><b>Обложка: 60 шт.</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp/lw-02.jpg" alt="Карточка маркетплейса, одноразовые полотенца Lucky Woman: Обложка: набор 120 шт." loading="lazy" /><figcaption><b>Обложка: набор 120 шт.</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp/lw-03.jpg" alt="Карточка маркетплейса, одноразовые полотенца Lucky Woman: Преимущества" loading="lazy" /><figcaption><b>Преимущества</b><em>карточка 03</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp/lw-04.jpg" alt="Карточка маркетплейса, одноразовые полотенца Lucky Woman: Плотные и мягкие" loading="lazy" /><figcaption><b>Плотные и мягкие</b><em>карточка 04</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp/lw-05.jpg" alt="Карточка маркетплейса, одноразовые полотенца Lucky Woman: Хватит надолго" loading="lazy" /><figcaption><b>Хватит надолго</b><em>карточка 05</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp/lw-06.jpg" alt="Карточка маркетплейса, одноразовые полотенца Lucky Woman: Вискоза без добавок" loading="lazy" /><figcaption><b>Вискоза без добавок</b><em>карточка 06</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp/lw-07.jpg" alt="Карточка маркетплейса, одноразовые полотенца Lucky Woman: Побалуйте кожу" loading="lazy" /><figcaption><b>Побалуйте кожу</b><em>карточка 07</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp/lw-08.jpg" alt="Карточка маркетплейса, одноразовые полотенца Lucky Woman: Где пригодятся" loading="lazy" /><figcaption><b>Где пригодятся</b><em>карточка 08</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp/lw-09.jpg" alt="Карточка маркетплейса, одноразовые полотенца Lucky Woman: Для себя и для любимых" loading="lazy" /><figcaption><b>Для себя и для любимых</b><em>карточка 09</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp/lw-10.jpg" alt="Карточка маркетплейса, одноразовые полотенца Lucky Woman: Косметологи рекомендуют" loading="lazy" /><figcaption><b>Косметологи рекомендуют</b><em>карточка 10</em></figcaption></figure>
+    </div>
+    <button class="gal__more" type="button">Смотреть все 10 <span>карточек · ещё 5</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+
+    <div class="blockhead" style="margin-top:var(--s8)">
+      <h3>Полотенца для лица — ещё три линейки</h3>
+      <p>Та же товарная категория, что и Lucky Woman, но три разных характера: золото и бордо для лицензионной серии с Микки, акварельная синева для «Котика» и «Мишки». Структура карточки общая, меняются палитра, герой и тон обращения.</p>
+    </div>
+
+    <p class="slug" style="margin-top:var(--s4)">Полотенце хлопковое Mickey, 24 × 20 см, 60 шт. · 7 карточек</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp2/mickey-01.jpg" alt="Карточка маркетплейса, полотенце Mickey: Обложка: размер и количество" loading="lazy" /><figcaption><b>Обложка: размер и количество</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/mickey-02.jpg" alt="Карточка маркетплейса, полотенце Mickey: Фактура полотна" loading="lazy" /><figcaption><b>Фактура полотна</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/mickey-03.jpg" alt="Карточка маркетплейса, полотенце Mickey: Эмоциональный слайд с моделью" loading="lazy" /><figcaption><b>Эмоциональный слайд с моделью</b><em>карточка 03</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/mickey-04.jpg" alt="Карточка маркетплейса, полотенце Mickey: Незаменимы в быту" loading="lazy" /><figcaption><b>Незаменимы в быту</b><em>карточка 04</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/mickey-05.jpg" alt="Карточка маркетплейса, полотенце Mickey: 60 штук в пачке" loading="lazy" /><figcaption><b>60 штук в пачке</b><em>карточка 05</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/mickey-06.jpg" alt="Карточка маркетплейса, полотенце Mickey: Плотное и мягкое" loading="lazy" /><figcaption><b>Плотное и мягкое</b><em>карточка 06</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/mickey-07.jpg" alt="Карточка маркетплейса, полотенце Mickey: Хорошо впитывают" loading="lazy" /><figcaption><b>Хорошо впитывают</b><em>карточка 07</em></figcaption></figure>
+    </div>
+    <button class="gal__more" type="button">Смотреть все 7 <span>карточек · ещё 2</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    <p class="slug" style="margin-top:var(--s6)">Полотенце хлопковое «Котик», 20 × 20 см · 5 карточек</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp2/kotik-01.jpg" alt="Карточка маркетплейса, полотенце «Котик»: Обложка: 20 × 20 см" loading="lazy" /><figcaption><b>Обложка: 20 × 20 см</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/kotik-02.jpg" alt="Карточка маркетплейса, полотенце «Котик»: Обложка набора из двух пачек" loading="lazy" /><figcaption><b>Обложка набора из двух пачек</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/kotik-03.jpg" alt="Карточка маркетплейса, полотенце «Котик»: Широкое применение" loading="lazy" /><figcaption><b>Широкое применение</b><em>карточка 03</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/kotik-04.jpg" alt="Карточка маркетплейса, полотенце «Котик»: Свойства с иконками" loading="lazy" /><figcaption><b>Свойства с иконками</b><em>карточка 04</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/kotik-05.jpg" alt="Карточка маркетплейса, полотенце «Котик»: Косметологи рекомендуют" loading="lazy" /><figcaption><b>Косметологи рекомендуют</b><em>карточка 05</em></figcaption></figure>
+    </div>
+    <p class="slug" style="margin-top:var(--s6)">Полотенце хлопковое «Мишка», 20 × 20 см, 50 шт. · 5 карточек</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp2/mishka-01.jpg" alt="Карточка маркетплейса, полотенце «Мишка»: Обложка: 20 × 20 см, 50 шт." loading="lazy" /><figcaption><b>Обложка: 20 × 20 см, 50 шт.</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/mishka-02.jpg" alt="Карточка маркетплейса, полотенце «Мишка»: Обложка: арктическая версия" loading="lazy" /><figcaption><b>Обложка: арктическая версия</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/mishka-03.jpg" alt="Карточка маркетплейса, полотенце «Мишка»: Широкое применение" loading="lazy" /><figcaption><b>Широкое применение</b><em>карточка 03</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/mishka-04.jpg" alt="Карточка маркетплейса, полотенце «Мишка»: Свойства с иконками" loading="lazy" /><figcaption><b>Свойства с иконками</b><em>карточка 04</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/mishka-05.jpg" alt="Карточка маркетплейса, полотенце «Мишка»: Косметологи рекомендуют" loading="lazy" /><figcaption><b>Косметологи рекомендуют</b><em>карточка 05</em></figcaption></figure>
+    </div>
+    <div class="blockhead" style="margin-top:var(--s8)">
+      <h3>Гигиена — влажные салфетки, пятновыводитель, ушные палочки</h3>
+      <p>Небольшие товары, где карточка решает всё: крупный продукт, одно сообщение на слайд и сценарии использования, понятные с первого взгляда.</p>
+    </div>
+
+    <p class="slug" style="margin-top:var(--s4)">Влажные салфетки, 80 шт. · 4 карточки</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp2/vlaj-01.jpg" alt="Карточка маркетплейса, влажные салфетки: Обложка: 80 шт." loading="lazy" /><figcaption><b>Обложка: 80 шт.</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/vlaj-02.jpg" alt="Карточка маркетплейса, влажные салфетки: Фактурная чистота" loading="lazy" /><figcaption><b>Фактурная чистота</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/vlaj-03.jpg" alt="Карточка маркетплейса, влажные салфетки: Клапан и крышка с защёлкой" loading="lazy" /><figcaption><b>Клапан и крышка с защёлкой</b><em>карточка 03</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/vlaj-04.jpg" alt="Карточка маркетплейса, влажные салфетки: Упаковка с двух сторон" loading="lazy" /><figcaption><b>Упаковка с двух сторон</b><em>карточка 04</em></figcaption></figure>
+    </div>
+    <p class="slug" style="margin-top:var(--s6)">Салфетки-пятновыводитель · 6 карточек</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp2/pyatno-01.jpg" alt="Карточка маркетплейса, салфетки от пятен: Обложка: 20 шт. в упаковке" loading="lazy" /><figcaption><b>Обложка: 20 шт. в упаковке</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/pyatno-02.jpg" alt="Карточка маркетплейса, салфетки от пятен: Ослепительно чисто" loading="lazy" /><figcaption><b>Ослепительно чисто</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/pyatno-03.jpg" alt="Карточка маркетплейса, салфетки от пятен: От каких пятен" loading="lazy" /><figcaption><b>От каких пятен</b><em>карточка 03</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/pyatno-04.jpg" alt="Карточка маркетплейса, салфетки от пятен: Как пользоваться" loading="lazy" /><figcaption><b>Как пользоваться</b><em>карточка 04</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/pyatno-05.jpg" alt="Карточка маркетплейса, салфетки от пятен: Всегда под рукой" loading="lazy" /><figcaption><b>Всегда под рукой</b><em>карточка 05</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/pyatno-06.jpg" alt="Карточка маркетплейса, салфетки от пятен: Где пригодятся" loading="lazy" /><figcaption><b>Где пригодятся</b><em>карточка 06</em></figcaption></figure>
+    </div>
+    <button class="gal__more" type="button">Смотреть все 6 <span>карточек · ещё 1</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    <p class="slug" style="margin-top:var(--s6)">Ушные палочки в боксе · 3 карточки</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp2/palochki-01.jpg" alt="Карточка маркетплейса, ушные палочки: Обложка" loading="lazy" /><figcaption><b>Обложка</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/palochki-02.jpg" alt="Карточка маркетплейса, ушные палочки: Уход и чистота" loading="lazy" /><figcaption><b>Уход и чистота</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/palochki-03.jpg" alt="Карточка маркетплейса, ушные палочки: Чёрная версия упаковки" loading="lazy" /><figcaption><b>Чёрная версия упаковки</b><em>карточка 03</em></figcaption></figure>
+    </div>
+    <div class="blockhead" style="margin-top:var(--s8)">
+      <h3>Детские товары — зубные щётки, пончо</h3>
+      <p>Яркие серии для родителей: цвет и персонаж отличают варианты, а размеры, возраст и уход вынесены на отдельные слайды, чтобы снять вопросы до покупки.</p>
+    </div>
+
+    <p class="slug" style="margin-top:var(--s4)">Детская зубная щётка «Грызунок», 0+ · 6 карточек</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp2/gryz-01.jpg" alt="Карточка маркетплейса, зубная щётка «Грызунок»: Голубой: обложка" loading="lazy" /><figcaption><b>Голубой: обложка</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/gryz-02.jpg" alt="Карточка маркетплейса, зубная щётка «Грызунок»: Голубой: размеры" loading="lazy" /><figcaption><b>Голубой: размеры</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/gryz-03.jpg" alt="Карточка маркетплейса, зубная щётка «Грызунок»: Голубой: преимущества" loading="lazy" /><figcaption><b>Голубой: преимущества</b><em>карточка 03</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/gryz-04.jpg" alt="Карточка маркетплейса, зубная щётка «Грызунок»: Зелёный: обложка" loading="lazy" /><figcaption><b>Зелёный: обложка</b><em>карточка 04</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/gryz-05.jpg" alt="Карточка маркетплейса, зубная щётка «Грызунок»: Зелёный: размеры" loading="lazy" /><figcaption><b>Зелёный: размеры</b><em>карточка 05</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/gryz-06.jpg" alt="Карточка маркетплейса, зубная щётка «Грызунок»: Зелёный: преимущества" loading="lazy" /><figcaption><b>Зелёный: преимущества</b><em>карточка 06</em></figcaption></figure>
+    </div>
+    <button class="gal__more" type="button">Смотреть все 6 <span>карточек · ещё 1</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    <p class="slug" style="margin-top:var(--s6)">Детская зубная щётка-пончик, 0+ · 6 карточек</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp2/bublik-01.jpg" alt="Карточка маркетплейса, зубная щётка-пончик: Розовый: обложка" loading="lazy" /><figcaption><b>Розовый: обложка</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/bublik-02.jpg" alt="Карточка маркетплейса, зубная щётка-пончик: Розовый: размеры" loading="lazy" /><figcaption><b>Розовый: размеры</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/bublik-03.jpg" alt="Карточка маркетплейса, зубная щётка-пончик: Розовый: преимущества" loading="lazy" /><figcaption><b>Розовый: преимущества</b><em>карточка 03</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/bublik-04.jpg" alt="Карточка маркетплейса, зубная щётка-пончик: Синий: обложка" loading="lazy" /><figcaption><b>Синий: обложка</b><em>карточка 04</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/bublik-05.jpg" alt="Карточка маркетплейса, зубная щётка-пончик: Синий: размеры" loading="lazy" /><figcaption><b>Синий: размеры</b><em>карточка 05</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/bublik-06.jpg" alt="Карточка маркетплейса, зубная щётка-пончик: Синий: преимущества" loading="lazy" /><figcaption><b>Синий: преимущества</b><em>карточка 06</em></figcaption></figure>
+    </div>
+    <button class="gal__more" type="button">Смотреть все 6 <span>карточек · ещё 1</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    <p class="slug" style="margin-top:var(--s6)">Детское полотенце-пончо · 7 карточек</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp2/poncho-01.jpg" alt="Карточка маркетплейса, детское пончо: Тачки: обложка" loading="lazy" /><figcaption><b>Тачки: обложка</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/poncho-02.jpg" alt="Карточка маркетплейса, детское пончо: Тачки: вариант" loading="lazy" /><figcaption><b>Тачки: вариант</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/poncho-03.jpg" alt="Карточка маркетплейса, детское пончо: Hello Kitty: зелёный" loading="lazy" /><figcaption><b>Hello Kitty: зелёный</b><em>карточка 03</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/poncho-04.jpg" alt="Карточка маркетплейса, детское пончо: Hello Kitty: розовый" loading="lazy" /><figcaption><b>Hello Kitty: розовый</b><em>карточка 04</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/poncho-05.jpg" alt="Карточка маркетплейса, детское пончо: Лягушка" loading="lazy" /><figcaption><b>Лягушка</b><em>карточка 05</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/poncho-06.jpg" alt="Карточка маркетплейса, детское пончо: Утка" loading="lazy" /><figcaption><b>Утка</b><em>карточка 06</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/poncho-07.jpg" alt="Карточка маркетплейса, детское пончо: Зайка" loading="lazy" /><figcaption><b>Зайка</b><em>карточка 07</em></figcaption></figure>
+    </div>
+    <button class="gal__more" type="button">Смотреть все 7 <span>карточек · ещё 2</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    <div class="blockhead" style="margin-top:var(--s8)">
+      <h3>Детские валенки — серия карточек под каждую модель</h3>
+      <p>Один шаблон (обложка, противоскользящая подошва, натуральный мех, таблица размеров) перекрашивается под цвет каждой модели. Серия читается как бренд, а новые артикулы выходят быстро.</p>
+    </div>
+
+    <p class="slug" style="margin-top:var(--s4)">Валенки, 100% войлок, до −40° · 25 карточек</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp2/valenki-01.jpg" alt="Карточка маркетплейса, детские валенки: Сиреневая серия: обложка" loading="lazy" /><figcaption><b>Сиреневая серия: обложка</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-02.jpg" alt="Карточка маркетплейса, детские валенки: Сиреневая серия: подошва" loading="lazy" /><figcaption><b>Сиреневая серия: подошва</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-03.jpg" alt="Карточка маркетплейса, детские валенки: Сиреневая серия: мех" loading="lazy" /><figcaption><b>Сиреневая серия: мех</b><em>карточка 03</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-04.jpg" alt="Карточка маркетплейса, детские валенки: Сиреневая серия: размеры" loading="lazy" /><figcaption><b>Сиреневая серия: размеры</b><em>карточка 04</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-05.jpg" alt="Карточка маркетплейса, детские валенки: Тёмно-синяя серия: обложка" loading="lazy" /><figcaption><b>Тёмно-синяя серия: обложка</b><em>карточка 05</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-06.jpg" alt="Карточка маркетплейса, детские валенки: Тёмно-синяя серия: подошва" loading="lazy" /><figcaption><b>Тёмно-синяя серия: подошва</b><em>карточка 06</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-07.jpg" alt="Карточка маркетплейса, детские валенки: Тёмно-синяя серия: мех" loading="lazy" /><figcaption><b>Тёмно-синяя серия: мех</b><em>карточка 07</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-08.jpg" alt="Карточка маркетплейса, детские валенки: Розовые: обложка" loading="lazy" /><figcaption><b>Розовые: обложка</b><em>карточка 08</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-09.jpg" alt="Карточка маркетплейса, детские валенки: Розовые: подошва" loading="lazy" /><figcaption><b>Розовые: подошва</b><em>карточка 09</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-10.jpg" alt="Карточка маркетплейса, детские валенки: Розовые: мех" loading="lazy" /><figcaption><b>Розовые: мех</b><em>карточка 10</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-11.jpg" alt="Карточка маркетплейса, детские валенки: Синие: обложка" loading="lazy" /><figcaption><b>Синие: обложка</b><em>карточка 11</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-12.jpg" alt="Карточка маркетплейса, детские валенки: Синие: подошва" loading="lazy" /><figcaption><b>Синие: подошва</b><em>карточка 12</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-13.jpg" alt="Карточка маркетплейса, детские валенки: Синие: мех" loading="lazy" /><figcaption><b>Синие: мех</b><em>карточка 13</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-14.jpg" alt="Карточка маркетплейса, детские валенки: Бирюзовая серия: обложка" loading="lazy" /><figcaption><b>Бирюзовая серия: обложка</b><em>карточка 14</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-15.jpg" alt="Карточка маркетплейса, детские валенки: Бирюзовая серия: подошва" loading="lazy" /><figcaption><b>Бирюзовая серия: подошва</b><em>карточка 15</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-16.jpg" alt="Карточка маркетплейса, детские валенки: Бирюзовая серия: мех" loading="lazy" /><figcaption><b>Бирюзовая серия: мех</b><em>карточка 16</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-17.jpg" alt="Карточка маркетплейса, детские валенки: Бирюзовая серия: размеры" loading="lazy" /><figcaption><b>Бирюзовая серия: размеры</b><em>карточка 17</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-18.jpg" alt="Карточка маркетплейса, детские валенки: Лавандовая серия: обложка" loading="lazy" /><figcaption><b>Лавандовая серия: обложка</b><em>карточка 18</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-19.jpg" alt="Карточка маркетплейса, детские валенки: Лавандовая серия: подошва" loading="lazy" /><figcaption><b>Лавандовая серия: подошва</b><em>карточка 19</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-20.jpg" alt="Карточка маркетплейса, детские валенки: Лавандовая серия: мех" loading="lazy" /><figcaption><b>Лавандовая серия: мех</b><em>карточка 20</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-21.jpg" alt="Карточка маркетплейса, детские валенки: Лавандовая серия: размеры" loading="lazy" /><figcaption><b>Лавандовая серия: размеры</b><em>карточка 21</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-22.jpg" alt="Карточка маркетплейса, детские валенки: Серая модель: обложка" loading="lazy" /><figcaption><b>Серая модель: обложка</b><em>карточка 22</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-23.jpg" alt="Карточка маркетплейса, детские валенки: Серая модель: подошва" loading="lazy" /><figcaption><b>Серая модель: подошва</b><em>карточка 23</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-24.jpg" alt="Карточка маркетплейса, детские валенки: Серая модель: мех" loading="lazy" /><figcaption><b>Серая модель: мех</b><em>карточка 24</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/valenki-25.jpg" alt="Карточка маркетплейса, детские валенки: Серая модель: размеры" loading="lazy" /><figcaption><b>Серая модель: размеры</b><em>карточка 25</em></figcaption></figure>
+    </div>
+    <button class="gal__more" type="button">Смотреть все 25 <span>карточек · ещё 20</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    <div class="blockhead" style="margin-top:var(--s8)">
+      <h3>Total Black — детская защита и рюкзак для роликов</h3>
+      <p>Карточки и предметные кадры с обтравкой для спортивного бренда: тёмный продукт на светлом фоне, живые сцены с детьми и технические слайды с размерами.</p>
+    </div>
+
+    <p class="slug" style="margin-top:var(--s4)">Защита детская, 3–7 лет · 7 карточек</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp2/zashita-01.jpg" alt="Карточка маркетплейса, детская защита Total Black: Обложка: состав и материалы" loading="lazy" /><figcaption><b>Обложка: состав и материалы</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/zashita-02.jpg" alt="Карточка маркетплейса, детская защита Total Black: Обложка: 3–7 лет" loading="lazy" /><figcaption><b>Обложка: 3–7 лет</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/zashita-03.jpg" alt="Карточка маркетплейса, детская защита Total Black: Спортивная защита" loading="lazy" /><figcaption><b>Спортивная защита</b><em>карточка 03</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/zashita-04.jpg" alt="Карточка маркетплейса, детская защита Total Black: Набор из шести элементов" loading="lazy" /><figcaption><b>Набор из шести элементов</b><em>карточка 04</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/zashita-05.jpg" alt="Карточка маркетплейса, детская защита Total Black: Достойные преимущества" loading="lazy" /><figcaption><b>Достойные преимущества</b><em>карточка 05</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/zashita-06.jpg" alt="Карточка маркетплейса, детская защита Total Black: Два вида застёжки" loading="lazy" /><figcaption><b>Два вида застёжки</b><em>карточка 06</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/zashita-07.jpg" alt="Карточка маркетплейса, детская защита Total Black: Защита ладоней" loading="lazy" /><figcaption><b>Защита ладоней</b><em>карточка 07</em></figcaption></figure>
+    </div>
+    <button class="gal__more" type="button">Смотреть все 7 <span>карточек · ещё 2</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    <p class="slug" style="margin-top:var(--s6)">Предметные кадры с обтравкой · 5 кадров</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp2/zfoto-01.jpg" alt="Карточка маркетплейса, детская защита Total Black: Упаковка" loading="lazy" /><figcaption><b>Упаковка</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/zfoto-02.jpg" alt="Карточка маркетплейса, детская защита Total Black: Чехол" loading="lazy" /><figcaption><b>Чехол</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/zfoto-03.jpg" alt="Карточка маркетплейса, детская защита Total Black: Наколенники" loading="lazy" /><figcaption><b>Наколенники</b><em>карточка 03</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/zfoto-04.jpg" alt="Карточка маркетплейса, детская защита Total Black: Налокотники" loading="lazy" /><figcaption><b>Налокотники</b><em>карточка 04</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/zfoto-05.jpg" alt="Карточка маркетплейса, детская защита Total Black: Защита запястий" loading="lazy" /><figcaption><b>Защита запястий</b><em>карточка 05</em></figcaption></figure>
+    </div>
+    <p class="slug" style="margin-top:var(--s6)">Рюкзак для роликов и коньков · 4 карточки</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp2/rukzak-01.jpg" alt="Карточка маркетплейса, рюкзак для роликов Total Black: Обложка" loading="lazy" /><figcaption><b>Обложка</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/rukzak-02.jpg" alt="Карточка маркетплейса, рюкзак для роликов Total Black: Размеры" loading="lazy" /><figcaption><b>Размеры</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/rukzak-03.jpg" alt="Карточка маркетплейса, рюкзак для роликов Total Black: Вентиляция" loading="lazy" /><figcaption><b>Вентиляция</b><em>карточка 03</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/rukzak-04.jpg" alt="Карточка маркетплейса, рюкзак для роликов Total Black: Предметное фото" loading="lazy" /><figcaption><b>Предметное фото</b><em>карточка 04</em></figcaption></figure>
+    </div>
+    <div class="blockhead" style="margin-top:var(--s8)">
+      <h3>Pillbox — таблетница с таймером</h3>
+      <p>Одна карточка в двух фирменных цветах площадок: синий для Ozon, фиолетовый для Wildberries. Настройку таймера разложил в пошаговую инструкцию.</p>
+    </div>
+
+    <p class="slug" style="margin-top:var(--s4)">Таблетница smart signal · 6 карточек</p>
+    <div class="gal gal--cards gal--clip">
+      <figure class="shot"><img src="img/mp2/pillbox-01.jpg" alt="Карточка маркетплейса, таблетница Pillbox: Ozon: обложка" loading="lazy" /><figcaption><b>Ozon: обложка</b><em>карточка 01</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/pillbox-02.jpg" alt="Карточка маркетплейса, таблетница Pillbox: Ozon: инструкция" loading="lazy" /><figcaption><b>Ozon: инструкция</b><em>карточка 02</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/pillbox-03.jpg" alt="Карточка маркетплейса, таблетница Pillbox: Ozon: неделя под контролем" loading="lazy" /><figcaption><b>Ozon: неделя под контролем</b><em>карточка 03</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/pillbox-04.jpg" alt="Карточка маркетплейса, таблетница Pillbox: Wildberries: обложка" loading="lazy" /><figcaption><b>Wildberries: обложка</b><em>карточка 04</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/pillbox-05.jpg" alt="Карточка маркетплейса, таблетница Pillbox: Wildberries: инструкция" loading="lazy" /><figcaption><b>Wildberries: инструкция</b><em>карточка 05</em></figcaption></figure>
+      <figure class="shot"><img src="img/mp2/pillbox-06.jpg" alt="Карточка маркетплейса, таблетница Pillbox: Wildberries: неделя под контролем" loading="lazy" /><figcaption><b>Wildberries: неделя под контролем</b><em>карточка 06</em></figcaption></figure>
+    </div>
+    <button class="gal__more" type="button">Смотреть все 6 <span>карточек · ещё 1</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
 
     <div class="blockhead" style="margin-top:var(--s8)">
       <h3>«Хлебный Спас» — упаковка печенья</h3>
@@ -1120,7 +1301,7 @@ a.crow:hover .crow__v { color: var(--accent); }
 <section class="section" id="media">
   <div class="wrap">
     <p class="slug">Фото · ретушь · иллюстрация · видео</p>
-    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span></span></div>
+    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b><i></i><b></b><i></i><i></i><i></i><b class="w"></b><i></i><i></i><i></i><span></span></div>
     <h2 class="h-sec">Контент к макету прилагается</h2>
     <p class="lede" style="margin-top:var(--s2)">
       Съёмка, обработка, иллюстрация и видео — те же руки, что верстают макет.
@@ -1238,7 +1419,7 @@ a.crow:hover .crow__v { color: var(--accent); }
 <section class="section section--tint" id="decks">
   <div class="wrap">
     <p class="slug">Презентации</p>
-    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span></span></div>
+    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b><i></i><b></b><i></i><i></i><i></i><b class="w"></b><i></i><i></i><i></i><span></span></div>
     <h2 class="h-sec">Готовые презентации целиком</h2>
     <p class="lede" style="margin-top:var(--s2)">
       Реальные материалы, которые я собирал для клиентов. Открываются прямо здесь —
@@ -1409,6 +1590,7 @@ a.crow:hover .crow__v { color: var(--accent); }
 @keyframes dofaSplash{to{transform:rotate(-4deg) scale(1.06)}}
 .dofa__hero{display:flex;gap:14px;align-items:flex-end;margin-top:18px}
 .dofa__mascot{width:clamp(70px,9vw,104px);flex:none;image-rendering:pixelated;animation:dofaHop 1.6s steps(2) infinite}
+.dofa__mascot--img{width:clamp(90px,11vw,132px);height:auto;image-rendering:auto;filter:drop-shadow(0 6px 0 rgba(0,0,0,.18))}
 @keyframes dofaHop{50%{transform:translateY(-6px)}}
 .dofa__sign{position:relative;background:#b58a55;color:#2a1a08;font-family:var(--d-body);font-weight:900;font-size:15px;line-height:1.35;padding:10px 12px;box-shadow:inset 3px 3px 0 #d6ac73,inset -3px -3px 0 #6d4f2b,0 0 0 3px var(--d-edge);max-width:30ch}
 .dofa__cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:22px}
@@ -1437,7 +1619,7 @@ a.crow:hover .crow__v { color: var(--accent); }
 <section class="section" id="dofa">
   <div class="wrap">
     <p class="slug">Свой проект · игра для детей</p>
-    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span></span></div>
+    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b><i></i><b></b><i></i><i></i><i></i><b class="w"></b><i></i><i></i><i></i><span></span></div>
     <h2 class="h-sec">Игра, в которой дети сами просят ещё примеров</h2>
     <p class="lede" style="margin-top:var(--s2)">
       «Арифметика ДОФА» — бесплатная игра-тренажёр счёта для детей дошкольного
@@ -1452,26 +1634,7 @@ a.crow:hover .crow__v { color: var(--accent); }
             <p class="dofa__logo">Арифметика <span>ДОФА</span></p>
             <span class="dofa__splash">Решай примеры — заряжайся дофой! ⚡</span>
             <div class="dofa__hero">
-              <svg class="dofa__mascot" role="img" aria-label="Талисман Дофик" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 22" shape-rendering="crispEdges">
-<g fill="rgba(0,0,0,.25)"><rect x="4" y="21" width="12" height="1"></rect></g>
-<g class="mbody">
-<g fill="#ffe14d"><rect x="10" y="0" width="1" height="1"></rect><rect x="9" y="1" width="1" height="1"></rect><rect x="10" y="1" width="1" height="1"></rect><rect x="8" y="2" width="3" height="1"></rect><rect x="10" y="3" width="1" height="1"></rect><rect x="9" y="4" width="1" height="1"></rect><rect x="10" y="4" width="1" height="1"></rect></g><g fill="#e0a800"><rect x="11" y="0" width="1" height="1"></rect><rect x="11" y="2" width="1" height="1"></rect><rect x="11" y="3" width="1" height="1"></rect></g>
-<g class="arm armL"><g fill="#ff8a2a"><rect x="1" y="11" width="2" height="4"></rect></g><g fill="#b44a12"><rect x="0" y="11" width="1" height="4"></rect><rect x="1" y="15" width="2" height="1"></rect></g></g>
-<g class="arm armR"><g fill="#ff8a2a"><rect x="17" y="11" width="2" height="4"></rect></g><g fill="#b44a12"><rect x="19" y="11" width="1" height="4"></rect><rect x="17" y="15" width="2" height="1"></rect></g></g>
-<g fill="#c75510"><rect x="5" y="19" width="3" height="1"></rect><rect x="12" y="19" width="3" height="1"></rect></g>
-<g fill="#b44a12"><rect x="4" y="5" width="12" height="1"></rect><rect x="4" y="18" width="12" height="1"></rect><rect x="3" y="6" width="1" height="12"></rect><rect x="16" y="6" width="1" height="12"></rect></g>
-<g fill="#ff8a2a"><rect x="4" y="6" width="12" height="12"></rect></g><g fill="#ffb35c"><rect x="5" y="6" width="4" height="1"></rect><rect x="4" y="7" width="1" height="3"></rect></g><g fill="#e86a1a"><rect x="5" y="17" width="11" height="1"></rect><rect x="15" y="8" width="1" height="9"></rect></g>
-<g fill="#ffd9a8"><rect x="7" y="14" width="6" height="3"></rect></g>
-<g fill="#ff6b8b"><rect x="5" y="12" width="1" height="1"></rect><rect x="14" y="12" width="1" height="1"></rect></g>
-<g class="eyesOpen"><g fill="#fff"><rect x="6" y="8" width="2" height="3"></rect><rect x="12" y="8" width="2" height="3"></rect></g><g fill="#2b1d3a"><rect x="7" y="9" width="1" height="2"></rect><rect x="13" y="9" width="1" height="2"></rect></g></g>
-<g class="eyesHappy" fill="#2b1d3a"><rect x="6" y="9" width="1" height="1"></rect><rect x="7" y="8" width="1" height="1"></rect><rect x="8" y="9" width="1" height="1"></rect><rect x="11" y="9" width="1" height="1"></rect><rect x="12" y="8" width="1" height="1"></rect><rect x="13" y="9" width="1" height="1"></rect></g>
-<g class="brows" fill="#2b1d3a"><rect x="6" y="7" width="1" height="1"></rect><rect x="7" y="6" width="1" height="1"></rect><rect x="13" y="7" width="1" height="1"></rect><rect x="12" y="6" width="1" height="1"></rect></g>
-<g class="mIdle" fill="#5a1430"><rect x="8" y="13" width="1" height="1"></rect><rect x="9" y="14" width="2" height="1"></rect><rect x="11" y="13" width="1" height="1"></rect></g>
-<g class="mHappy"><g fill="#5a1430"><rect x="8" y="13" width="4" height="2"></rect><rect x="7" y="12" width="1" height="1"></rect><rect x="12" y="12" width="1" height="1"></rect></g><g fill="#ff4a6a"><rect x="9" y="14" width="2" height="1"></rect></g></g>
-<g class="mJoy"><g fill="#5a1430"><rect x="7" y="13" width="6" height="3"></rect><rect x="6" y="12" width="1" height="1"></rect><rect x="13" y="12" width="1" height="1"></rect></g><g fill="#ff4a6a"><rect x="9" y="15" width="2" height="1"></rect></g></g>
-<g class="mSad" fill="#5a1430"><rect x="8" y="15" width="1" height="1"></rect><rect x="9" y="14" width="2" height="1"></rect><rect x="11" y="15" width="1" height="1"></rect></g>
-<g class="tear" fill="#5ec8ff"><rect x="6" y="11" width="1" height="2"></rect></g>
-</g></svg>
+              <img class="dofa__mascot dofa__mascot--img" src="img/dofik.png" alt="Талисман Дофик — оранжевый кубик с жёлтой молнией" width="320" height="316" />
               <p class="dofa__sign">Привет! Я Дофик. Решим пару примеров? За верные ответы — заряд дофы ⚡</p>
             </div>
             <div class="dofa__cta">
@@ -1525,7 +1688,7 @@ a.crow:hover .crow__v { color: var(--accent); }
 <section class="section" id="contact">
   <div class="wrap">
     <p class="slug">Контакты</p>
-    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span></span></div>
+    <div class="press-rule" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b><i></i><b></b><i></i><i></i><i></i><b class="w"></b><i></i><i></i><i></i><span></span></div>
 
     <div class="contact">
       <div>
@@ -2107,7 +2270,7 @@ a.crow:hover .crow__v { color: var(--accent); }
 
 <footer class="foot">
   <div class="wrap">
-    <div class="press-rule" style="margin-block:0 var(--s3)" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><span></span></div>
+    <div class="press-rule" style="margin-block:0 var(--s3)" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b><i></i><b></b><i></i><i></i><i></i><b class="w"></b><i></i><i></i><i></i><span></span></div>
     <div class="foot__in">
       <span>Евгений Мелёхин · графический дизайнер</span>
       <span>Волгоград · <span id="year">2026</span></span>
@@ -2174,6 +2337,21 @@ a.crow:hover .crow__v { color: var(--accent); }
   /* --- год в подвале --- */
   var y = document.getElementById("year");
   if (y) y.textContent = String(new Date().getFullYear());
+})();
+</script>
+<script>
+/* картинка героя: верх выровнен по верху заголовка */
+(function () {
+  var copy = document.querySelector(".hero__copy"), h1 = document.querySelector(".hero .h-hero"), grid = document.querySelector(".hero__grid");
+  if (!copy || !h1 || !grid) return;
+  function fit() {
+    var cs = getComputedStyle(h1), fs = parseFloat(cs.fontSize), lh = parseFloat(cs.lineHeight);
+    var lead = isNaN(lh) ? 0 : (lh - fs) / 2;
+    /* верх блока заголовка + половина интерлиньяжа + отступ над прописными буквами */
+    grid.style.setProperty("--hero-off", Math.round(h1.offsetTop - copy.offsetTop + lead + fs * 0.14) + "px");
+  }
+  fit(); window.addEventListener("resize", fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 })();
 </script>
 </body>
